@@ -1,15 +1,25 @@
 <template>
-<div class="navbar padding-limiter">
-    XIEE
+<div class="main padding-limiter">
+    <BookPanel/>
+    <div class="double-column">
+        <div class="panel-wide">
+            
+        </div>
+        <div class="panel-narrow">
+            
+        </div>
+    </div>
 </div>
 </template>
 
 <script>
+import BookPanel from '../Panels/BookPanel.vue'
 export default {
-  name: 'BookView',
-  data () {
-      return {};
-  }
+name: 'BookView',
+components:{BookPanel},
+data () {
+    return {};
+}
 }
 </script>
 
