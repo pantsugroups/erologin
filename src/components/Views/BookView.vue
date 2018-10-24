@@ -3,10 +3,11 @@
     <BookPanel/>
     <div class="double-column">
         <div class="panel-wide">
-            
+            <VolumePanel/>
+            <CommentPanel/>
         </div>
         <div class="panel-narrow">
-            
+            <RecommendPanel/>
         </div>
     </div>
 </div>
@@ -14,9 +15,12 @@
 
 <script>
 import BookPanel from '../Panels/BookPanel.vue'
+import VolumePanel from '../Panels/VolumePanel.vue'
+import RecommendPanel from '../Panels/RecommendPanel.vue'
+import CommentPanel from '../Panels/CommentPanel.vue'
 export default {
 name: 'BookView',
-components:{BookPanel},
+components:{BookPanel,VolumePanel,RecommendPanel,CommentPanel},
 data () {
     return {};
 }
