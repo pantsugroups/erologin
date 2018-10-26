@@ -4,7 +4,7 @@
     <div class="double-column">
         <div class="panel-wide">
             <VolumePanel v-bind:volumes="volumes"/>
-            <CommentPanel/>
+            <CommentPanel v-bind:comments="comments"/>
         </div>
         <div class="panel-narrow">
             <RecommendPanel/>
@@ -31,7 +31,24 @@ data () {
             description:'一群死宅要凉技术宅的日常聊(si)天(bi)',
             tags:'日常 / 女装 / 死宅'
         },
-        volumes:[]
+        volumes:[],
+        comments:[
+          {
+            'avatar':'https://qwq.moe/img/avatar.jpg',
+            'author':'Archeb',
+            'bio':'Poi~',
+            'floor':'#1',
+            'content':'<p>强推！</p><p>这书不火我让鳖直播女装！</p>'
+          },
+          {
+            'avatar':'https://secure.gravatar.com/avatar/c004f07e4aeea5ada1cc18fa390f6e09?s=55&amp;r=G&amp;d=',
+            'author':'⑨BIE',
+            'bio':'我要女装！',
+            'style':'background-color:#f58d8d',
+            'floor':'#2',
+            'content':'<p>吼啊<br>...⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄....</p>'
+          }
+        ]
         };
 },
 created(){

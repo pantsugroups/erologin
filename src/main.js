@@ -6,10 +6,12 @@ import App from './App'
 import router from './router'
 import Components from './components'
 import config from './config'
+import Notify from './plugins/Notify'
 
 import '@mdi/font/css/materialdesignicons.css'
 
 Vue.use(Components)
+Vue.use(Notify)
 
 Vue.prototype.$config=config
 

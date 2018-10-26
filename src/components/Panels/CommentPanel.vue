@@ -12,46 +12,28 @@
             </div>
         </div>
         <div class="comment-list">
-            <div class="topcomment"></div>
-            <div class="comment-item">
+            <div class="comment-item" v-for="comment in comments">
                 <div class="avatar">
-                    <img src="https://qwq.moe/img/avatar.jpg" alt="">
+                    <img v-bind:src="comment.avatar" alt="">
                 </div>
                 <div class="content">
-                    <div class="author"> <a>Archeb</a>
-                        <span class="floor">#1</span>
-                        <span class="bio">Bio~</span>
+                    <div class="author"> <a>{{ comment.author }}</a>
+                        <span class="floor" v-bind:style="comment.style">{{ comment.floor }}</span>
+                        <span class="bio">{{ comment.bio }}</span>
                     </div>
-                    <div class="comment-text">
-                        <p>如果这小说不火我让⑨BIE直播女装！</p>
-                        <p>多行测试</p>
-                        <p>多行测试</p>
-                        <p>多行测试</p>
+                    <div class="comment-text" v-html="comment.content">
+                        
                     </div>
                 </div>
             </div>
-            <div class="comment-item">
-                <div class="avatar">
-                    <img src="https://secure.gravatar.com/avatar/c004f07e4aeea5ada1cc18fa390f6e09?s=55&amp;r=G&amp;d=" alt="">
-                </div>
-                <div class="content">
-                    <div class="author"> <a>⑨BIE</a>
-                        <span class="floor" style="background-color:#f58d8d">#2</span>
-                        <span class="bio">我要女装！</span>
-
-                    </div>
-                    <div class="comment-text">
-                        <p>吼啊
-                            <br>...⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄....</p>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
 </template>
 <script>
 export default {
     name: 'CommentPanel',
+    props:['comments'],
     data () {
         return {
             'title':'goushi'

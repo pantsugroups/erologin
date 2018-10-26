@@ -6,7 +6,7 @@
         <div class="navbar-item">发现</div>
     </div>
     <div class="navbar-group">
-        <div class="navbar-item">登录</div>
+        <div class="navbar-item" v-on:click="testnotify">登录</div>
     </div>
 </div>
 </template>
@@ -16,6 +16,11 @@ export default {
   name: 'NavBar',
   data () {
       return {};
+  },
+  methods:{
+      testnotify:function(){
+          this.$Notify('测试','测试Notify!','background-color:#9d5321');
+      }
   }
 }
 </script>

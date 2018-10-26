@@ -3,7 +3,6 @@
     <NavBar/>
     <div class="single-bg"></div>
     <router-view/>
-    
   </div>
 </template>
 
