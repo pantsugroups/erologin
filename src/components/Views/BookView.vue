@@ -1,9 +1,9 @@
 <template>
 <div class="main padding-limiter">
-    <BookPanel/>
+    <BookPanel v-bind:book="book"/>
     <div class="double-column">
         <div class="panel-wide">
-            <VolumePanel/>
+            <VolumePanel v-bind:volumes="volumes"/>
             <CommentPanel/>
         </div>
         <div class="panel-narrow">
@@ -22,7 +22,26 @@ export default {
 name: 'BookView',
 components:{BookPanel,VolumePanel,RecommendPanel,CommentPanel},
 data () {
-    return {};
+    return {
+        book:{
+            title:'胖次群的奇妙日常',
+            coverimg:'/static/bookUndefined.png',
+            publisher:'胖次Group',
+            author:'Ero Devs',
+            description:'一群死宅要凉技术宅的日常聊(si)天(bi)',
+            tags:'日常 / 女装 / 死宅'
+        },
+        volumes:[]
+        };
+},
+created(){
+    fetch(this.$config.api_base+'/novel/detail/'+this.$route.params.id).then(data=>data.json()).then(data=>{
+      data.data.tags=data.data.tags.join(" / ");
+      this.book=data.data;
+    })
+    fetch(this.$config.api_base+'/novel/volumes/'+this.$route.params.id).then(data=>data.json()).then(data=>{
+      this.volumes=data.data;
+    })
 }
 }
 </script>

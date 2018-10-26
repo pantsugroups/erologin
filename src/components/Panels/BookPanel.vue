@@ -1,21 +1,22 @@
 <template>
 <div class="panel book-panel">
     <div class="book-cover">
-        <img v-bind:src="coverimg">
+        <img v-bind:src="book.cover">
     </div>
     <div class="book-info">
         <div class="content">
             <div class="title-container">
-                <div class="title">{{ title }}
-                    <div class="author">{{ publisher }} · {{ author }}</div>
+                <div class="title">{{ book.title }}
+                    <div class="author">{{ book.publisher }} · {{ book.author }}</div>
                 </div>
                 <div class="rate"></div>
             </div>
-            <div class="description" v-html="description">
+            <div class="description" v-html="book.description">
             </div>
-            <div class="tags">{{ tags }}</div>
+            
         </div>
         <div class="action">
+            <div class="tags">{{ book.tags }}</div>
             <a class="read"><span class="mdi mdi-play"></span> 立即阅读</a>
             <a class="read push"><span class="mdi mdi-cloud-download"></span> 下载 / 推送</a>
             <a class="read favourite"><span class="mdi mdi-cards-heart"></span> 收藏订阅</a>
@@ -26,10 +27,20 @@
 <script>
 export default {
     name: 'BookPanel',
-    data () {
-        return {
-            'title':'goushi'
-        };
+    props:{
+        book: {
+            default:function(){
+                return {
+                    title:'胖次群的奇妙日常',
+                    coverimg:'/static/bookUndefined.png',
+                    publisher:'胖次Group',
+                    author:'Ero Devs',
+                    description:'一群死宅要凉技术宅的日常聊(si)天(bi)',
+                    tags:'日常 / 女装 / 死宅'
+                    
+                }
+            }
+        }
     }
 }
 </script>
@@ -43,6 +54,7 @@ export default {
     .book-cover{
         img{
             margin-top:-80px;
+            width:258px;
             margin-left:-30px;
             margin-bottom:-80px;
             box-shadow:0 6px 15px rgba(36, 37, 38, 0.2);
@@ -64,20 +76,21 @@ export default {
             font-weight:300;
             white-space:none;
             .author{
-                margin-top:3px;
+                margin-top:-3px;
                 color:#969696;
                 font-size:15px;
             }
         }
         .description{
             font-size:15px;
+            margin-top: 5px;
             line-height:1.5;
         }
         .rate{
             font-size:30px;
         }
         .tags{
-            margin-top:10px;
+            margin-bottom:25px;
             font-size:14px;
             color:#969696;
         }

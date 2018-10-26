@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <NavBar/>
+    <div class="single-bg"></div>
     <router-view/>
+    
   </div>
 </template>
 
@@ -61,6 +63,26 @@ body {
     .padding-limiter{
         padding-left:6%;
         padding-right:6%;
+    }
+}
+.single-bg{
+    background-image:url('assets/single-bg1.jpg');
+    background-color:white;
+    background-size:cover;
+    position:fixed;
+    width:100vw;
+    height:100vh;
+    top:0;
+    left:0;
+    z-index:-1;
+    &:after{
+        content:'';
+        position:fixed;
+        width:100vw;
+        height:100vh;
+        top:0;
+        left:0;
+        background:rgba(246, 246, 246, 0.9);
     }
 }
 .panel{

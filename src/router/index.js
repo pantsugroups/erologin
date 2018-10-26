@@ -7,7 +7,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/book',
+      path: '/book/:id',
       name: 'Book',
       component: BookView
     }

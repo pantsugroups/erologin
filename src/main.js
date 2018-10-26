@@ -5,10 +5,13 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Components from './components'
+import config from './config'
 
 import '@mdi/font/css/materialdesignicons.css'
 
 Vue.use(Components)
+
+Vue.prototype.$config=config
 
 
 Vue.config.productionTip = false

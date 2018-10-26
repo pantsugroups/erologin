@@ -1,93 +1,22 @@
 <template>
 <div class="panel volume-panel">
-                        <div class="panel-title">章节目录</div>
-                        <div class="volume-list"> <span class="volume-title">第一卷 啊啊，没用的女神大人</span>
-
-                            <div class="chapter-list">
-                                <div class="chapter-item">
-                                    <div class="chapter-name">序章</div>
-                                </div>
-                                <div class="chapter-item">
-                                    <div class="chapter-name">和这个自称女神转生到异世界！</div>
-                                </div>
-                                <div class="chapter-item">
-                                    <div class="chapter-name">以这只右手偷取宝物（内裤）!</div>
-                                </div>
-                                <div class="chapter-item">
-                                    <div class="chapter-name">在这座湖中加入鲜榨自称女神汁！</div>
-                                </div>
-                                <div class="chapter-item">
-                                    <div class="chapter-name">解决这场不像话的战斗！</div>
-                                </div>
-                                <div class="chapter-item">
-                                    <div class="chapter-name">终章</div>
-                                </div>
-                                <div class="chapter-item">
-                                    <div class="chapter-name">后记</div>
-                                </div>
-                            </div> <span class="volume-title">第二卷 中二病也想当魔女</span>
-
-                            <div class="chapter-list">
-                                <div class="chapter-item">
-                                    <div class="chapter-name">序章</div>
-                                </div>
-                                <div class="chapter-item">
-                                    <div class="chapter-name">与真正的伙伴进行交换！</div>
-                                </div>
-                                <div class="chapter-item">
-                                    <div class="chapter-name">让迷宫的主人得到安息！</div>
-                                </div>
-                                <div class="chapter-item">
-                                    <div class="chapter-name">向幽灵少女伸出爱之手！</div>
-                                </div>
-                                <div class="chapter-item">
-                                    <div class="chapter-name">为美好的店家献上祝福！</div>
-                                </div>
-                                <div class="chapter-item">
-                                    <div class="chapter-name">蛮横的要塞燃起终焰！</div>
-                                </div>
-                                <div class="chapter-item">
-                                    <div class="chapter-name">终章</div>
-                                </div>
-                                <div class="chapter-item">
-                                    <div class="chapter-name">后记</div>
-                                </div>
-                            </div> <span class="volume-title">第三卷 你被召唤咯，达克妮丝小姐。</span>
-
-                            <div class="chapter-list">
-                                <div class="chapter-item">
-                                    <div class="chapter-name">序章</div>
-                                </div>
-                                <div class="chapter-item">
-                                    <div class="chapter-name">为不当审判请求救援！</div>
-                                </div>
-                                <div class="chapter-item">
-                                    <div class="chapter-name">让红魔女孩结交朋友！</div>
-                                </div>
-                                <div class="chapter-item">
-                                    <div class="chapter-name">为贵族千金促成良缘！</div>
-                                </div>
-                                <div class="chapter-item">
-                                    <div class="chapter-name">使面具骑士成为隶属！</div>
-                                </div>
-                                <div class="chapter-item">
-                                    <div class="chapter-name">终章</div>
-                                </div>
-                                <div class="chapter-item">
-                                    <div class="chapter-name">后记</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+  <div class="panel-title">章节目录</div>
+  <div class="volume-list"> 
+    <div class="volume-item" v-for="volume in volumes">
+      <span class="volume-title">{{ volume.title }}</span>
+      <div class="chapter-list">
+        <div class="chapter-item" v-for="chapter in volume.chapters">
+          <div class="chapter-name">{{chapter}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 <script>
 export default {
     name: 'VolumePanel',
-    data () {
-        return {
-            'title':'goushi'
-        };
-    }
+    props:['volumes']
 }
 </script>
 
