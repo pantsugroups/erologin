@@ -14,17 +14,30 @@
       <IndexPersonalPanel />
     </div>
   </div>
+  <br>
+  <div class="panel indexlist-panel">
+  <div class="panel-title">首页推荐</div>
+  <div class="book-list">
+    <BookListItem />
+    <BookListItem />
+    <BookListItem />
+    <BookListItem />
+    <BookListItem />
+    <BookListItem />
+  </div>
+  </div>
 </div>
 </template>
 
 <script>
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import IndexPersonalPanel from '../Panels/IndexPersonalPanel.vue'
+import BookListItem from '../Items/BookListItem.vue'
 import 'swiper/dist/css/swiper.css'
 
   export default {
     name: 'IndexView',
-    components:{swiper, swiperSlide,IndexPersonalPanel},
+    components:{swiper, swiperSlide,IndexPersonalPanel,BookListItem},
     data () {return {
       swiperOption: {
         spaceBetween: 30,
@@ -54,6 +67,15 @@ import 'swiper/dist/css/swiper.css'
 .swiper-container{
     box-shadow: 0 6px 15px rgba(36, 37, 38, 0.1);
     border-radius:3px;
+    .swiper-button-next , .swiper-button-prev{
+      opacity:0;
+      transition:opacity 0.5s;
+    }
+    &:hover{
+      .swiper-button-next , .swiper-button-prev{
+        opacity:0.8;
+      }
+    }
 }
 .swiper-slide {
     background-position: center;
@@ -67,4 +89,14 @@ import 'swiper/dist/css/swiper.css'
   .slide-2{
     background-image:url('../../assets/single-bg2.jpg');
   }
+.book-list{
+margin-top:20px;
+  display:flex;
+  padding-left:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+  .book-item{
+    margin-right:10px;
+  }
+}
 </style>

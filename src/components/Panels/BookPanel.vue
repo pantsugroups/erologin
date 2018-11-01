@@ -32,7 +32,7 @@ export default {
             default:function(){
                 return {
                     title:'胖次群的奇妙日常',
-                    coverimg:'/static/bookUndefined.png',
+                    cover:'/static/bookUndefined.png',
                     publisher:'胖次Group',
                     author:'Ero Devs',
                     description:'一群死宅要凉技术宅的日常聊(si)天(bi)',
