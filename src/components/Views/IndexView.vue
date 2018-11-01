@@ -1,22 +1,30 @@
 <template>
 <div class="main padding-limiter">
-    <swiper :options="swiperOption">
-        <swiper-slide class="slide-1"></swiper-slide>
-        <swiper-slide class="slide-2"></swiper-slide>
-        <div class="swiper-pagination swiper-pagination-white" slot="pagination"></div>
-        <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
-        <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
-    </swiper>
+  <div class="double-column">
+    <div class="panel-wide">
+      <swiper :options="swiperOption">
+          <swiper-slide class="slide-1"></swiper-slide>
+          <swiper-slide class="slide-2"></swiper-slide>
+          <div class="swiper-pagination swiper-pagination-white" slot="pagination"></div>
+          <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+          <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
+      </swiper>
+    </div>
+    <div class="panel-narrow">
+      <IndexPersonalPanel />
+    </div>
+  </div>
 </div>
 </template>
 
 <script>
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import IndexPersonalPanel from '../Panels/IndexPersonalPanel.vue'
 import 'swiper/dist/css/swiper.css'
 
   export default {
     name: 'IndexView',
-    components:{swiper, swiperSlide},
+    components:{swiper, swiperSlide,IndexPersonalPanel},
     data () {return {
       swiperOption: {
         spaceBetween: 30,
@@ -40,14 +48,17 @@ import 'swiper/dist/css/swiper.css'
 </script>
 
 <style scoped lang="less">
+.double-column{
+  align-items:start;
+}
 .swiper-container{
-    box-shadow: 0 3px 10px rgba(36, 37, 38, 0.08);
+    box-shadow: 0 6px 15px rgba(36, 37, 38, 0.1);
     border-radius:3px;
 }
 .swiper-slide {
     background-position: center;
     background-size: cover;
-    height:500px;
+    height:350px;
   
 }
 .slide-1{
