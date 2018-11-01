@@ -75,6 +75,7 @@ export default {
 }
 .tabs {
 width:100%;
+    flex-shrink: 0;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.05);
   margin:0px 30px;
       background-color: rgba(255,255,255,0.8);
@@ -88,7 +89,7 @@ font-family:"Material Design Icons";
 width:100%;
   display: inline-block;
   margin: 0;
-  padding: 12px 0 17px;
+  padding: 12px 0;
   
   font-size: 16px;
   letter-spacing: 0.8px;
@@ -106,14 +107,14 @@ width:100%;
 }
 
 .tabs__item:hover {
-  border-bottom: 2px solid gray;
-  color: black;
+  //border-bottom: 2px solid gray;
+  //color: black;
 }
 
 .tabs__item:focus {
   outline: none;
-  border-bottom: 2px solid gray;
-  color: black;
+  //border-bottom: 2px solid gray;
+  //color: black;
 }
 
 .tabs__item:first-child {
