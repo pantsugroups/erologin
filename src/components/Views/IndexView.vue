@@ -16,7 +16,7 @@
   </div>
   <br>
   <div class="panel indexlist-panel">
-  <div class="panel-title">首页推荐</div>
+  <div class="indexlist-title">首页推荐</div>
   <div class="book-list">
     <BookListItem />
     <BookListItem />
@@ -24,7 +24,29 @@
     <BookListItem />
     <BookListItem />
     <BookListItem />
+    <BookListItem />
   </div>
+  <div class="indexlist-title">最近更新</div>
+  <div class="book-list">
+    <BookListItem />
+    <BookListItem />
+    <BookListItem />
+    <BookListItem />
+    <BookListItem />
+    <BookListItem />
+    <BookListItem />
+  </div>
+  <div class="indexlist-title">自暴自弃</div>
+  <div class="book-list">
+    <BookListItem />
+    <BookListItem />
+    <BookListItem />
+    <BookListItem />
+    <BookListItem />
+    <BookListItem />
+    <BookListItem />
+  </div>
+  
   </div>
 </div>
 </template>
@@ -94,7 +116,6 @@ margin-top:20px;
   display:flex;
   padding-left:10px;
   flex-wrap:wrap;
-  justify-content:center;
   .book-item{
     margin-right:10px;
   }

@@ -48,15 +48,15 @@ export default {
     }
   }
   .book-cover{
-    width:200px;
-    height:275px;
+    width:160px;
+    height:225px;
     background-size:cover;
     box-shadow:1px 1px 10px rgba(0,0,0,0.3);
     display:flex;
     flex-direction: column-reverse;
   }
   .book-title{
-    max-width:200px;
+    max-width:160px;
     overflow:hidden;
     padding:8px 5px;
     background: rgba(0, 0, 0, 0.5);
@@ -66,15 +66,15 @@ export default {
     text-overflow: ellipsis;
     text-align:center;
     transition:all 0.3s;
-    font-size:15px;
+    font-size:14px;
 
   }
   .book-detailed{
     opacity:0;
     transition:all 0.3s;
-    width: 200px;
+    width: 160px;
     text-shadow: 1px 1px 8px rgba(255,255,255,0.1);
-    height: 275px;
+    height: 225px;
     position: absolute;
     overflow:hidden;
     color: #d8d8d8;
@@ -82,7 +82,7 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 10px;
     .book-cover-blur{
       z-index:0;
       position:absolute;
@@ -102,7 +102,7 @@ export default {
       border-top:1px solid #969696;
       width:100%;
       text-align: left;
-      font-size:14px;
+      font-size:13px;
       .mdi{
         border:1px solid #969696;
         border-radius:50%;
