@@ -9,44 +9,39 @@
           <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
           <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
       </swiper>
+    
+    <br>
+    <div class="panel indexlist-panel">
+    <div class="indexlist-title">首页推荐</div>
+    <div class="book-list">
+      <BookListItem />
+      <BookListItem />
+      <BookListItem />
+      <BookListItem />
+      <BookListItem />
+    </div>
+    <div class="indexlist-title">最近更新</div>
+    <div class="book-list">
+      <BookListItem />
+      <BookListItem />
+      <BookListItem />
+      <BookListItem />
+      <BookListItem />
+    </div>
+    <div class="indexlist-title">自暴自弃</div>
+    <div class="book-list">
+      <BookListItem />
+      <BookListItem />
+      <BookListItem />
+      <BookListItem />
+      <BookListItem />
+    </div>
+
+    </div>
     </div>
     <div class="panel-narrow">
       <IndexPersonalPanel />
     </div>
-  </div>
-  <br>
-  <div class="panel indexlist-panel">
-  <div class="indexlist-title">首页推荐</div>
-  <div class="book-list">
-    <BookListItem />
-    <BookListItem />
-    <BookListItem />
-    <BookListItem />
-    <BookListItem />
-    <BookListItem />
-    <BookListItem />
-  </div>
-  <div class="indexlist-title">最近更新</div>
-  <div class="book-list">
-    <BookListItem />
-    <BookListItem />
-    <BookListItem />
-    <BookListItem />
-    <BookListItem />
-    <BookListItem />
-    <BookListItem />
-  </div>
-  <div class="indexlist-title">自暴自弃</div>
-  <div class="book-list">
-    <BookListItem />
-    <BookListItem />
-    <BookListItem />
-    <BookListItem />
-    <BookListItem />
-    <BookListItem />
-    <BookListItem />
-  </div>
-  
   </div>
 </div>
 </template>
