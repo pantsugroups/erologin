@@ -4,6 +4,9 @@
         <div class="panel-narrow">
             <UserInfoPanel />
         </div>
+        <div class="panel-wide">
+            <PersonalSettingsPanel />
+        </div>
     </div>
     
 </div>
@@ -11,10 +14,11 @@
 
 <script>
 
-import UserInfoPanel from '../Panels/UserInfoPanel.vue';
+import UserInfoPanel from '../Panels/Settings/UserInfoPanel.vue';
+import PersonalSettingsPanel from '../Panels/Settings/PersonalSettingsPanel.vue';
 export default {
 name: 'SettingsView',
-components:{UserInfoPanel},
+components:{UserInfoPanel,PersonalSettingsPanel},
 data () {
     return {};
 }
@@ -22,5 +26,7 @@ data () {
 </script>
 
 <style scoped lang="less">
-
+.double-column{
+    align-items:flex-start;
+}
 </style>

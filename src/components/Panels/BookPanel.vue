@@ -1,7 +1,7 @@
 <template>
 <div class="panel book-panel">
     <div class="book-cover">
-        <img v-bind:src="book.cover">
+        <img src="../../assets/book3.jpg">
     </div>
     <div class="book-info">
         <div class="content">

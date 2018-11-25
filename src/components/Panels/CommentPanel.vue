@@ -182,7 +182,7 @@ export default {
             background-color: #4ba5f5;
             padding: 1px 8px;
             border-radius: 100px;
-            color: #eaeaea;
+            color: #ffffff;
         }
         .author {
             font-size: 16px;
