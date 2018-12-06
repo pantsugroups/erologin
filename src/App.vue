@@ -128,5 +128,6 @@ body {
 }
 .main{
     padding-top:120px;
+    padding-bottom:40px;
 }
 </style>

@@ -11,26 +11,54 @@
     />
     <div class="panel personalsettings-panel">
     <div v-if="currentTab === 'tab1'">
-        <p>动态和消息放在一起是不是更好</p>
-        <p>啦啦啦啦</p>
-        <p>啦啦啦啦</p>
-        <p>啦啦啦啦</p>
-        <p>啦啦啦啦</p>
-        <p>啦啦啦啦</p>
+        <form>
+            <div class="control-group">
+              <label>名字</label>
+              <div class="controls">
+                <input type="text" title="名字" value=""></div>
+              <label class="tips">注：点击左边的头像更换头像</label>
+            </div>
+            
+            <div class="control-group">
+              <label>一句话介绍</label>
+              <div class="controls">
+                <input type="text" title="一句话介绍" value=""></div>
+                <label class="tips">比如 “柚子天下第一”</label>
+            </div>
+            <div class="control-group">
+              <label>个人简介</label>
+              <div class="controls">
+                <textarea title="个人简介" orgname="个人简介" rows=8></textarea>
+              </div>
+            </div>
+            <div class="control-group">
+              <label>首页链接</label>
+              <div class="controls">
+                <input type="text" title="首页链接" value=""></div>
+              <label class="tips">没有就留空呗~</label>
+            </div>
+        </form>
       </div>
       <div v-if="currentTab === 'tab2'">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
+        <form>
+            <div class="control-group">
+              <label>安全邮箱</label>
+              <div class="controls">
+                <input type="text" title="安全邮箱" value=""></div>
+              <label class="tips">这不是Kindle推送邮箱！</label>
+            </div>
+            
+            <div class="control-group">
+              <label>修改密码</label>
+              <div class="controls">
+                <input type="password" title="修改密码" value=""></div>
+                <label class="tips">如果不修改请留空</label>
+            </div>
+        </form>
       </div>
       <div v-if="currentTab === 'tab3'">
-        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-        voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
-        occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt
-        mollitia animi, id est laborum et dolorum fuga.
+        <p>摸了</p>
+        <p>如果觉得本站好用就跟你的傻逼网友多多宣传就行</p>
       </div>
     </div>
 </div>
@@ -43,9 +71,9 @@ export default {
     data () {
         return {
             tabs: [
-            { title: '基本资料', value: 'tab1' },
-            { title: '安全设置', value: 'tab2' },
-            { title: '邀请注册', value: 'tab3' }
+            { title: ' 基本资料', value: 'tab1' },
+            { title: ' 安全设置', value: 'tab2' },
+            { title: ' 邀请注册', value: 'tab3' }
         ],
         currentTab: 'tab1',
         };
@@ -85,6 +113,7 @@ width:100%;
   letter-spacing: 0.8px;
   color: #9d9d9d;
   text-decoration: none;
+  font-family:'Material Design Icons';
   border: none;
   background-color: transparent;
   border-bottom: 2px solid transparent;
@@ -126,5 +155,63 @@ width:100%;
 }
 }
 
+</style>
+<style lang="less" scoped>
 
+.control-group {
+  display: flex;
+  padding: 15px 40px 15px 0;
+}
+.controls{
+    width:100%;
+}
+label {
+  width: 100px;
+  color: #777;
+  overflow:hidden;
+  padding: 3px;
+  font-size: 14px;
+  text-align: right;
+    flex-shrink:0;
+  
+}
+.tips{
+    color:#aaa;
+    font-size:13px;
+    margin-left:5px;
+    width:300px;
+    text-align:left;
+}
+input {
+  margin: 0 10px;
+  width: 250px;
+  border: none;
+  -webkit-appearance: none;
+  outline: none;
+  font-size: 14px;
+  color: #222;
+  padding: 3px 8px;
+  border-bottom: 1px solid #dddddd;
+  background-color: white;
+  transition: all 0.5s;
+}
+textarea {
+  width: 100%;
+  resize: none;
+  max-width: 100%;
+
+  box-sizing: border-box;
+  border: none;
+  margin: 0 10px;
+  -webkit-appearance: none;
+  padding: 6px;
+  border-bottom: 1px solid #dddddd;
+  font-size: 14px;
+  background-color: white;
+  color: #333;
+  background-size: 135px;
+  transition: all 0.5s, background-position 0.3s, background-size 0.3s;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+}
 </style>
