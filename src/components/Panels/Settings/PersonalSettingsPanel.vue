@@ -27,7 +27,7 @@
             </div>
             <div class="control-group">
               <label>个人简介</label>
-              <div class="controls">
+              <div class="controls" style="width:100%">
                 <textarea title="个人简介" orgname="个人简介" rows=8></textarea>
               </div>
             </div>
@@ -36,6 +36,9 @@
               <div class="controls">
                 <input type="text" title="首页链接" value=""></div>
               <label class="tips">没有就留空呗~</label>
+            </div>
+            <div class="controls actions">
+                <button v-on:click="saveprofile">保存</button>
             </div>
         </form>
       </div>
@@ -82,6 +85,9 @@ export default {
     handleClick(newTab) {
       this.currentTab = newTab;
     },
+    saveprofile(){
+        this.$Notify('成功','您的个人信息已成功保存','background-color:#4eb739');
+    }
   }
 }
 </script>
@@ -157,13 +163,13 @@ width:100%;
 
 </style>
 <style lang="less" scoped>
-
+.actions{
+    padding:20px;
+    text-align:right;
+}
 .control-group {
   display: flex;
   padding: 15px 40px 15px 0;
-}
-.controls{
-    width:100%;
 }
 label {
   width: 100px;
@@ -194,12 +200,18 @@ input {
   border-bottom: 1px solid #dddddd;
   background-color: white;
   transition: all 0.5s;
+  &:hover{
+      border-color:#aaa;
+  }
+  &:focus{
+      border-color:#999;
+  }
 }
 textarea {
   width: 100%;
   resize: none;
   max-width: 100%;
-
+outline:none;
   box-sizing: border-box;
   border: none;
   margin: 0 10px;
@@ -213,5 +225,25 @@ textarea {
   transition: all 0.5s, background-position 0.3s, background-size 0.3s;
   background-repeat: no-repeat;
   background-position: right bottom;
+  &:hover{
+      border-color:#aaa;
+  }
+  &:focus{
+      border-color:#999;
+  }
+}
+button{
+        cursor: pointer;
+    padding: 10px 20px 12px;
+    background-color: #2196F3;
+    border-radius: 500px;
+    border:none;
+    font-size:14px;
+    outline:none;
+    color: #fafafa;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.15);
+    margin-right: 10px;
 }
 </style>
