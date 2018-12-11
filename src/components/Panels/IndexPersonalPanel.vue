@@ -123,7 +123,7 @@ width:100%;
     bottom: 0;
     left: 0;
     height: 2px;
-    background-color: #333;
+    background-color: #6ba59d;
     transition: transform 0.4s ease, width 0.4s ease;
   }
 }

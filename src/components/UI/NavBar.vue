@@ -2,7 +2,7 @@
 <div class="navbar padding-limiter">
     <div class="navbar-group">
         <div class="navbar-logo navbar-item navbar-item-withicon"><span class="mdi mdi-book-open-variant"></span>Ero Light</div>
-        <div class="navbar-item">首页</div>
+        <router-link to="/" class="navbar-item">首页</router-link>
         <div class="navbar-item">发现</div>
     </div>
     <div class="navbar-group">
@@ -51,7 +51,7 @@ export default {
             transition:border-color 0.5s;
             cursor:pointer;
             &:hover{
-                border-color:#333;
+                border-color:#6ba59d;
             }
         }
         .navbar-logo{

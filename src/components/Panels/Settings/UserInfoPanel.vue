@@ -9,15 +9,15 @@
                             </div>
                         </div>
                         <div class="action-list">
-                            <div class="action-item">
+                            <router-link to="/settings/personal"  class="action-item">
                                 <span class="mdi mdi-account-edit"></span> 个人设置
-                            </div>
+                            </router-link>
                             <div class="action-item">
                                 <span class="mdi mdi-message-bulleted"></span> 评论管理
                             </div>
-                            <div class="action-item">
+                            <router-link to="/settings/push"  class="action-item">
                                 <span class="mdi mdi-sync"></span> 推送设置
-                            </div>
+                            </router-link>
                             <div class="action-item">
                                 <span class="mdi mdi-library-books"></span> 书籍管理
                             </div>

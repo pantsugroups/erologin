@@ -11,17 +11,26 @@ export default new Router({
     {
       path:'/',
       name:'Index',
-      component: IndexView
+      component: IndexView,
+      meta:{
+        title:'首页 · Ero Light'
+      }
     },
     {
       path: '/book/:id',
       name: 'Book',
-      component: BookView
+      component: BookView,
+      meta:{
+        title:'书籍 · Ero Light'
+      }
     },
     {
-      path: '/settings',
+      path: '/settings/:setpanel',
       name: 'Settings',
-      component: SettingsView
+      component: SettingsView,
+      meta:{
+        title:'设置 · Ero Light'
+      }
     }
   ]
 })

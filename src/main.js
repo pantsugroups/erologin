@@ -18,6 +18,10 @@ Vue.prototype.$config=config
 
 Vue.config.productionTip = false
 
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title
+  next()
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

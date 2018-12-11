@@ -55,6 +55,7 @@ created(){
     fetch(this.$config.api_base+'/novel/detail/'+this.$route.params.id).then(data=>data.json()).then(data=>{
       data.data.tags=data.data.tags.join(" / ");
       this.book=data.data;
+      document.title=data.data.title + ' · Ero Light';
     })
     fetch(this.$config.api_base+'/novel/volumes/'+this.$route.params.id).then(data=>data.json()).then(data=>{
       this.volumes=data.data;
