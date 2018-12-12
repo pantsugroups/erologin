@@ -12,16 +12,18 @@
                             <router-link to="/settings/personal"  class="action-item">
                                 <span class="mdi mdi-account-edit"></span> 个人设置
                             </router-link>
-                            <div class="action-item">
+                            <router-link to="/settings/comment" class="action-item">
                                 <span class="mdi mdi-message-bulleted"></span> 评论管理
-                            </div>
+                            </router-link>
                             <router-link to="/settings/push"  class="action-item">
                                 <span class="mdi mdi-sync"></span> 推送设置
                             </router-link>
                             <div class="action-item">
                                 <span class="mdi mdi-library-books"></span> 书籍管理
                             </div>
-                            
+                        </div>
+                        <div class="shortcut-list">
+                            <div class="btn" style="background-color:#67b72b"><span class="mdi mdi-cloud-upload"></span> 上传书籍</div>
                         </div>
                     </div>
 </template>
@@ -96,6 +98,34 @@ export default {
             
         }
         
+    }
+    .shortcut-list{
+        margin-top:25px;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+    }
+    .btn{
+        text-align:center;
+        margin-left:10px;
+        cursor:pointer;
+        width:240px;
+        padding:10px 20px 12px;
+        background-color:#2196F3;
+        border-radius:500px;
+        color:#fafafa;
+        transition:all 0.3s;
+        text-shadow:1px 1px 8px rgba(0,0,0,0.15);
+        margin-right:10px;
+        .mdi{
+            margin-right:5px;
+        }
+        &:hover{
+            box-shadow:1px 1px 30px rgba(0,0,0,0.1),0 6px 15px rgba(36, 37, 38, 0.1),inset 5px 5px 15px transparent;
+        }
+        &:active{
+            box-shadow:1px 1px 30px transparent,0 6px 15px transparent,inset 0 0 15px rgba(36, 37, 38, 0.2);
+        }
     }
 }
 </style>

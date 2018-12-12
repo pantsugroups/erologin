@@ -29,7 +29,7 @@ export default new Router({
       name: 'Settings',
       component: SettingsView,
       meta:{
-        title:'设置 · Ero Light'
+        title:'个人中心 · Ero Light'
       }
     }
   ]
