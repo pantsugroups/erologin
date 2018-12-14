@@ -18,9 +18,9 @@
                             <router-link to="/settings/push"  class="action-item">
                                 <span class="mdi mdi-sync"></span> 推送设置
                             </router-link>
-                            <div class="action-item">
+                            <router-link to="/settings/book" class="action-item">
                                 <span class="mdi mdi-library-books"></span> 书籍管理
-                            </div>
+                            </router-link>
                         </div>
                         <div class="shortcut-list">
                             <div class="btn" style="background-color:#67b72b"><span class="mdi mdi-cloud-upload"></span> 上传书籍</div>

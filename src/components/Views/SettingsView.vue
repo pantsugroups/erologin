@@ -8,6 +8,7 @@
             <PersonalSettingsPanel v-if="this.$route.params.setpanel === 'personal'"/>
             <PushSettingsPanel v-if="this.$route.params.setpanel === 'push'"/>
             <CommentSettingsPanel v-if="this.$route.params.setpanel === 'comment'"/>
+            <BookSettingsPanel v-if="this.$route.params.setpanel === 'book'"/>
         </div>
     </div>
     
@@ -20,9 +21,10 @@ import UserInfoPanel from '../Panels/Settings/UserInfoPanel.vue';
 import PersonalSettingsPanel from '../Panels/Settings/PersonalSettingsPanel.vue';
 import PushSettingsPanel from '../Panels/Settings/PushSettingsPanel.vue';
 import CommentSettingsPanel from '../Panels/Settings/CommentSettingsPanel.vue';
+import BookSettingsPanel from '../Panels/Settings/BookSettingsPanel.vue';
 export default {
 name: 'SettingsView',
-components:{UserInfoPanel,PushSettingsPanel,PersonalSettingsPanel,CommentSettingsPanel},
+components:{UserInfoPanel,PushSettingsPanel,PersonalSettingsPanel,CommentSettingsPanel,BookSettingsPanel},
 data () {
     return {};
 }
