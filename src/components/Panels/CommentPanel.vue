@@ -43,7 +43,7 @@ export default {
 </script>
 <style scope lang="less">
 .comment-panel{
-    margin-top:50px;
+    margin-top:10px;
     .comment-send{
         .reply-info {
             transition: all 0.25s;
