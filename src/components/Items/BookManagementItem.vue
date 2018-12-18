@@ -4,11 +4,12 @@
     <div class="book-title">{{ book.title }}</div>
     <div class="book-detailed">
       <div class="book-cover-blur" v-bind:style="'background-image:url(' +book.cover+ ')'"></div>
+      <div class="edit"><span class="mdi mdi-pencil"></span></div>
+      <div class="delete"><span class="mdi mdi-close"></span></div>
       <div class="full-title">{{ book.title }}</div>
       <div class="book-info">
-        <div class="source"><span class="mdi mdi-library-books"></span>{{ book.publisher }}</div>
+        <div class="source"><span class="mdi mdi-calendar-clock"></span>2018-12-15</div>
         <div class="author"><span class="mdi mdi-account-edit"></span>{{ book.author }}</div>
-        <div class="author"><span class="mdi mdi-tag-multiple"></span>{{ book.tags }}</div>
       </div>
     </div>
   </div>
@@ -91,6 +92,39 @@ export default {
       height: 310px;
       background-size:cover;
     }
+    .edit{
+      z-index:1;
+      position:absolute;
+      left:0;
+      top:0;
+      width:40px;
+      height:40px;
+      padding:5px 7px;
+      clip-path: ellipse(100% 100% at 0 0);
+      background-color:rgba(0,0,0,0.2);
+      transition:background-color 0.5s;
+      cursor:pointer;
+      &:hover{
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+    }
+    .delete{
+      z-index:1;
+      position:absolute;
+      right:0;
+      top:0;
+      width:40px;
+      height:40px;
+      padding:4px 15px;
+      font-size:18px;
+      clip-path: ellipse(100% 100% at 100% 0);
+      background-color:rgba(0,0,0,0.2);
+      transition:background-color 0.5s;
+      cursor:pointer;
+      &:hover{
+        background-color: rgba(0,0,0,0.5);
+      }
+    }
     .full-title{
       text-align:left;
       z-index:1;
@@ -106,7 +140,7 @@ export default {
       .mdi{
         border:1px solid #969696;
         border-radius:50%;
-        padding:4px;
+        padding:4px 5px;
         width:25px;
         height:25px;
         margin-right:7px;

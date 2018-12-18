@@ -6,7 +6,7 @@
       <div class="book-cover-blur" v-bind:style="'background-image:url(' +book.cover+ ')'"></div>
       <div class="full-title">{{ book.title }}</div>
       <div class="book-info">
-        <div class="source"><span class="mdi mdi-library-books"></span>{{ book.publisher }}</div>
+        <div class="source"><span class="mdi mdi-calendar-clock"></span>{{ book.updatetime }}</div>
         <div class="author"><span class="mdi mdi-account-edit"></span>{{ book.author }}</div>
         <div class="author"><span class="mdi mdi-tag-multiple"></span>{{ book.tags }}</div>
       </div>
@@ -25,6 +25,7 @@ export default {
                     cover:'/static/bookUndefined.png',
                     publisher:'胖次Group',
                     author:'Ero Devs',
+                    updatetime:'2018-12-15',
                     description:'一群死宅要凉技术宅的日常聊(si)天(bi)',
                     tags:'日常 / 女装 / 死宅'
                     
@@ -106,7 +107,7 @@ export default {
       .mdi{
         border:1px solid #969696;
         border-radius:50%;
-        padding:4px;
+        padding:4px 5px;
         width:25px;
         height:25px;
         margin-right:7px;

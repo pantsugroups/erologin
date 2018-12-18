@@ -61,8 +61,8 @@ body {
 }
 @media(max-width:1440px){
     .padding-limiter{
-        padding-left:6%;
-        padding-right:6%;
+        padding-left:9%;
+        padding-right:9%;
     }
 }
 .single-bg{

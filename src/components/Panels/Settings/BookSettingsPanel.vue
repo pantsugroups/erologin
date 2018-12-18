@@ -61,5 +61,7 @@ export default {
     margin-top:15px;
     display:flex;
     flex-wrap:wrap;
+    justify-content: center;
+    padding-left: 15px;
 }
 </style>
