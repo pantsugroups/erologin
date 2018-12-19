@@ -18,7 +18,7 @@
         <div class="action">
             <div class="tags">{{ book.tags }}</div>
             <a class="read"><span class="mdi mdi-play"></span> 立即阅读</a>
-            <a class="read push"><span class="mdi mdi-cloud-download"></span> 下载 / 推送</a>
+            <a class="read push"><span class="mdi mdi-download"></span> 下载 / 推送</a>
             <a class="read favourite"><span class="mdi mdi-cards-heart"></span> 收藏订阅</a>
         </div>
     </div>
