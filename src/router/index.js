@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import BookView from '@/components/Views/BookView.vue'
 import IndexView from '@/components/Views/IndexView.vue'
 import SettingsView from '@/components/Views/SettingsView.vue'
+import LoginView from '@/components/Views/LoginView.vue'
 
 Vue.use(Router)
 
@@ -30,6 +31,14 @@ export default new Router({
       component: SettingsView,
       meta:{
         title:'个人中心 · Ero Light'
+      }
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginView,
+      meta:{
+        title:'登陆 · Ero Light'
       }
     }
   ]

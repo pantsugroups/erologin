@@ -65,6 +65,15 @@ body {
         padding-right:9%;
     }
 }
+@media(max-width:800px){
+    body{
+        display:none;
+    }
+    html:after{
+        content:'网站升级维护中，造成不便敬请谅解...';
+        font-size:20pt;
+    }
+}
 .single-bg{
     background-image:url('assets/single-bg1.jpg');
     background-color:white;

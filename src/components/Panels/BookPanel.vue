@@ -7,7 +7,7 @@
         <div class="content">
             <div class="title-container">
                 <div class="title">{{ book.title }}
-                    <div class="author">{{ book.publisher }} · {{ book.author }}</div>
+                    <div class="author">{{ book.author }}</div>
                 </div>
                 <div class="rate"></div>
             </div>
@@ -77,6 +77,7 @@ export default {
             white-space:none;
             .author{
                 margin-top:-3px;
+                margin-left:3px;
                 color:#969696;
                 font-size:15px;
             }

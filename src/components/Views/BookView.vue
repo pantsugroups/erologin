@@ -65,5 +65,7 @@ created(){
 </script>
 
 <style scoped lang="less">
-
+.double-column{
+    align-items:flex-start;
+}
 </style>
