@@ -62,6 +62,7 @@ pre{
   position:absolute;
   margin:0;
   text-align:left;
+  height:16px;
   outline:none;
   overflow:hidden;
 }
