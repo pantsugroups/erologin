@@ -3,7 +3,7 @@
 <div class="panel login-panel">
 <div class="double-column">
   <div class="panel-wide">
-    <img class="login-img" src="../../assets/login.jpg" />
+    <img class="login-img" src="../assets/login.jpg" />
     <a class="login-img-source" href="https://www.pixiv.net/member_illust.php?mode=medium&illust_id=72175889">Source</a>
   </div>
   <div class="panel-narrow">
@@ -30,11 +30,12 @@
 </template>
 
 <script>
-
   export default {
     name: 'LoginView',
-    components:{},
-    data () {return {}}
+    components: {},
+    data (){
+      return {}
+    }
   }
 </script>
 

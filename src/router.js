@@ -1,20 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import BookView from '@/components/Views/BookView.vue'
-import IndexView from '@/components/Views/IndexView.vue'
-import SettingsView from '@/components/Views/SettingsView.vue'
-import LoginView from '@/components/Views/LoginView.vue'
+import BookView from '@/views/BookView.vue'
+import IndexView from '@/views/IndexView.vue'
+import SettingsView from '@/views/SettingsView.vue'
+import LoginView from '@/views/LoginView.vue'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
-      path:'/',
-      name:'Index',
+      path: '/',
+      name: 'Index',
       component: IndexView,
       meta:{
-        title:'首页 · Ero Light'
+        title: '首页 · Ero Light'
       }
     },
     {
@@ -22,7 +23,7 @@ export default new Router({
       name: 'Book',
       component: BookView,
       meta:{
-        title:'书籍 · Ero Light'
+        title: '书籍 · Ero Light'
       }
     },
     {
@@ -30,7 +31,7 @@ export default new Router({
       name: 'Settings',
       component: SettingsView,
       meta:{
-        title:'个人中心 · Ero Light'
+        title: '个人中心 · Ero Light'
       }
     },
     {
@@ -38,7 +39,7 @@ export default new Router({
       name: 'login',
       component: LoginView,
       meta:{
-        title:'登陆 · Ero Light'
+        title: '登陆 · Ero Light'
       }
     }
   ]

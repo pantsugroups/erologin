@@ -3,17 +3,15 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import router from './router'
-import Components from './components'
+import router from './router.js'
 import config from './config'
 import Notify from './plugins/Notify'
 
 import '@mdi/font/css/materialdesignicons.css'
 
-Vue.use(Components)
 Vue.use(Notify)
 
-Vue.prototype.$config=config
+Vue.prototype.$config = config
 
 
 Vue.config.productionTip = false

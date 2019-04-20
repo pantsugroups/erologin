@@ -48,14 +48,20 @@
 
 <script>
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
-import IndexPersonalPanel from '../Panels/IndexPersonalPanel.vue'
-import BookListItem from '../Items/BookListItem.vue'
+import IndexPersonalPanel from '../components/Panels/IndexPersonalPanel.vue'
+import BookListItem from '../components/Items/BookListItem.vue'
 import 'swiper/dist/css/swiper.css'
 
-  export default {
-    name: 'IndexView',
-    components:{swiper, swiperSlide,IndexPersonalPanel,BookListItem},
-    data () {return {
+export default {
+  name: 'IndexView',
+  components: {
+    swiper,
+    swiperSlide,
+    IndexPersonalPanel,
+    BookListItem
+  },
+  data (){
+    return {
       swiperOption: {
         spaceBetween: 30,
         effect: 'fade',
@@ -73,8 +79,8 @@ import 'swiper/dist/css/swiper.css'
         }
       }
     }
-            }
   }
+}
 </script>
 
 <style scoped lang="less">
@@ -101,10 +107,10 @@ import 'swiper/dist/css/swiper.css'
   
 }
 .slide-1{
-    background-image:url('../../assets/bg2.jpg');
+    background-image:url('../assets/bg2.jpg');
   }
   .slide-2{
-    background-image:url('../../assets/single-bg2.jpg');
+    background-image:url('../assets/single-bg2.jpg');
   }
 .book-list{
 margin-top:20px;
