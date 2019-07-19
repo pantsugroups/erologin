@@ -34,32 +34,65 @@ export default {
       },
       volumes: [],
       comments: [
-        {
-          'avatar':'https://qwq.moe/img/avatar.jpg',
-          'author':'Archeb',
-          'bio':'Poi.',
-          'floor':'#1',
-          'content':'<p>强推！</p><p>这书不火我让鳖直播女装！</p>'
-        },
-        {
-          'avatar':'https://secure.gravatar.com/avatar/c004f07e4aeea5ada1cc18fa390f6e09?s=55&amp;r=G&amp;d=',
-          'author':'⑨BIE',
-          'bio':'我要女装！',
-          'style':'background-color:#f58d8d',
-          'floor':'#2',
-          'content':'<p>吼啊<br>...⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄....</p>'
-        }
+        // {
+        //   'avatar':'https://qwq.moe/img/avatar.jpg',
+        //   'author':'Archeb',
+        //   'bio':'Poi.',
+        //   'floor':'#1',
+        //   'content':'<p>强推！</p><p>这书不火我让鳖直播女装！</p>'
+        // },
+        // {
+        //   'avatar':'https://secure.gravatar.com/avatar/c004f07e4aeea5ada1cc18fa390f6e09?s=55&amp;r=G&amp;d=',
+        //   'author':'⑨BIE',
+        //   'bio':'我要女装！',
+        //   'style':'background-color:#f58d8d',
+        //   'floor':'#2',
+        //   'content':'<p>吼啊<br>...⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄....</p>'
+        // }
       ]
     }
   },
   created(){
-      fetch(this.$config.api_base+'/novel/detail/'+this.$route.params.id).then(data=>data.json()).then(data=>{
-        data.data.tags=data.data.tags.join(" / ");
-        this.book=data.data;
+      fetch(this.$config.api_base+'light/novel/detail/'+this.$route.params.id).then(data=>data.json()).then(data=>{
+        
+        this.book=data.data.novel;
+        
+        this.book.cover =this.$config.api_base + data.data.novel.cover;
+        
         document.title=data.data.title + ' · Ero Light';
+        
+        fetch(this.$config.api_base+'light/novel/volumes/'+this.$route.params.id).then(data=>data.json()).then(data=>{
+          
+          data.data.volumes.forEach(volume => {
+            
+            volume.cover =this.$config.api_base + volume.cover;
+            this.volumes.push(volume);
+            
+          });
+        })
       })
-      fetch(this.$config.api_base+'/novel/volumes/'+this.$route.params.id).then(data=>data.json()).then(data=>{
-        this.volumes=data.data;
+      fetch(this.$config.api_base+"light/comment/list/"+this.$route.params.id).then(data=>data.json()).then(data=>{
+        data.data.comments.forEach(c=>{
+          console.log(c);
+          fetch(this.$config.api_base+"auth/get/"+c.user).then(data=>data.json()).then(data=>{
+            console.log(data)
+            if (data.code===0){
+              if (data.data.avatar == null){
+                data.data.avatar = 'https://qwq.moe/img/avatar.jpg';
+              }
+              this.comments.push(
+                {
+                  "avatar":data.data.avatar,
+                  "author":data.data.nickname,
+                  "content":c.content,
+                  "floor":"#1"
+                }
+              )
+            }
+          }
+          )
+        })
+        
       })
   }
 }

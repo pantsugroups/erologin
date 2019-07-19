@@ -1,12 +1,12 @@
 <template>
-<div class="book-item">
+<div class="book-item" v-on:click="jump">
   <div class="book-cover" v-bind:style="'background-image:url(' +book.cover+ ')'">
     <div class="book-title">{{ book.title }}</div>
     <div class="book-detailed">
       <div class="book-cover-blur" v-bind:style="'background-image:url(' +book.cover+ ')'"></div>
       <div class="full-title">{{ book.title }}</div>
       <div class="book-info">
-        <div class="source"><span class="mdi mdi-calendar-clock"></span>{{ book.updatetime }}</div>
+        <div class="source"><span class="mdi mdi-calendar-clock"></span>{{ book.update_time }}</div>
         <div class="author"><span class="mdi mdi-account-edit"></span>{{ book.author }}</div>
         <div class="author"><span class="mdi mdi-tag-multiple"></span>{{ book.tags }}</div>
       </div>
@@ -17,21 +17,31 @@
 <script>
 export default {
     name: 'BookListItem',
+    created(){
+        console.log(this.book);
+    },
+    
     props:{
         book: {
             default:function(){
                 return {
+                    id:"1",
                     title:'胖次群的奇妙日常',
                     cover:'/static/bookUndefined.png',
                     publisher:'胖次Group',
                     author:'Ero Devs',
-                    updatetime:'2018-12-15',
+                    update_time:'2018-12-15',
                     description:'一群死宅要凉技术宅的日常聊(si)天(bi)',
                     tags:'日常 / 女装 / 死宅'
                     
                 }
             }
         }
+    },
+    methods:{
+      jump:function(){
+        window.location.href="/book/"+this.book.id;
+      }
     }
 }
 </script>

@@ -1,7 +1,8 @@
 <template>
 <div class="panel book-panel">
     <div class="book-cover">
-        <img src="../../assets/book3.jpg">
+        
+        <img v-bind:src="book.cover" />
     </div>
     <div class="book-info">
         <div class="content">
@@ -18,24 +19,60 @@
         <div class="action">
             <div class="tags">{{ book.tags }}</div>
             <a class="read"><span class="mdi mdi-play"></span> 立即阅读</a>
-            <a class="read push"><span class="mdi mdi-download"></span> 下载 / 推送</a>
-            <a class="read favourite"><span class="mdi mdi-cards-heart"></span> 收藏订阅</a>
+            <a class="read push"><span class="mdi mdi-download"></span> 推送</a>
+            <a class="read favourite" v-on:click="subscribe"><span class="mdi mdi-cards-heart" ></span> {{this.is_subscribe}}</a>
         </div>
     </div>
 </div>
 </template>
 <script>
 export default {
+    data(){
+        return {
+            is_subscribe:"订阅",
+        }
+    },
+    
+    created(){
+        fetch(this.$config.api_base+"light/novel/is_subscribe/"+this.$route.params.id,{credentials:"include"}).then(data=>data.json()).then(data=>{
+            if (data.code === 0){
+                if (data.data.is_subscribe === 1){
+                    this.is_subscribe = "取消订阅"
+                } 
+            }
+        })
+    },
     name: 'BookPanel',
+    
+    methods:{
+        subscribe:function(){
+            fetch(this.$config.api_base+"light/novel/subscribe/"+this.$route.params.id,{credentials:"include"}).then(data=>data.json()).then(data=>{
+                if(data.code===0){
+                    if (this.is_subscribe == "订阅"){
+                        this.$Notify('成功','订阅成功!','background-color:#green');
+                        this.is_subscribe = "取消订阅"
+                    }else{
+                        this.$Notify('成功','取消订阅成功!','background-color:#green');
+                        this.is_subscribe = "订阅"
+                    }
+                    
+                }else{
+                    this.$Notify('失败','失败！','background-color:#red');
+                }
+            }).catch(data=>{
+                this.$Notify('错误','未知错误','background-color:#red');
+            })
+        }
+    },
     props:{
         book: {
             default:function(){
                 return {
-                    title:'胖次群的奇妙日常',
+                    title:'加载中...',
                     cover:'/static/bookUndefined.png',
-                    publisher:'胖次Group',
+                    publisher:'加载中...',
                     author:'Ero Devs',
-                    description:'一群死宅要凉技术宅的日常聊(si)天(bi)',
+                    description:'加载中...',
                     tags:'日常 / 女装 / 死宅'
                     
                 }

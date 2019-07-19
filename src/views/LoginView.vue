@@ -7,22 +7,22 @@
     <a class="login-img-source" href="https://www.pixiv.net/member_illust.php?mode=medium&illust_id=72175889">Source</a>
   </div>
   <div class="panel-narrow">
-    <form class="login-form">
+    <!-- <form class="login-form"> -->
       <div class="title"><span class="mdi mdi-book-open-variant"></span>Ero Light</div>
         <div class="control-group">
           <label>用户名</label>
           <div class="controls">
-            <input type="text" title="用户名" value=""></div>
+            <input type="text" title="用户名" value="" v-model=data.username></div>
         </div>
         <div class="control-group">
           <label>密码</label>
           <div class="controls">
-            <input type="password" title="密码" value=""></div>
+            <input type="password" title="密码" value="" v-model=data.passwd></div>
         </div>
         <div class="controls actions">
-            <button>登陆</button>
+            <button v-on:click="login">登陆</button>
         </div>
-    </form>
+    <!-- </form> -->
   </div>
 </div>
 </div>
@@ -32,9 +32,41 @@
 <script>
   export default {
     name: 'LoginView',
+    
     components: {},
+    methods:{
+      login:function(){
+        console.log(this.data.username,this.data.passwd);
+          fetch(this.$config.api_base+"auth/login",{method: 'post',
+          headers: {
+    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+  },credentials:"include",
+          body:"user="+this.data.username+"&passwd="+this.data.passwd
+          }).then(data=>data.json()).then(data=>{
+            if (data.code === 0){
+              // 登陆成功
+              this.$Notify('登陆成功','欢迎回来!','background-color:#9d5321');
+              window.location.href="/";
+            }else{
+              alert(data.msg);
+              username="";
+              passwd="";
+            }
+          }).catch(data=>{
+    this.$Notify('登陆失败','未知错误!','background-color:#red');
+          }
+            
+          )
+      }
+    },
+
     data (){
-      return {}
+      return {
+        data:{
+          username:"",
+          passwd:"",
+        }
+      }
     }
   }
 </script>

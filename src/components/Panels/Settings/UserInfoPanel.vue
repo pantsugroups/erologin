@@ -1,11 +1,11 @@
 <template>
 <div class="panel userinfo-panel">
-                        <div class="avatar"><img src="https://qwq.moe/img/avatar.jpg" alt=""></div>
+                        <div class="avatar"><img :src="user.avatar" alt=""></div>
                         <div class="user-info">
-                            <a>Archeb</a>
+                            <a>{{user.username}}</a>
                             <div class="tags">
-                                <span style="background-color:#96d248">Lv. 233</span>
-                                <span>管理员</span>
+                                <span style="background-color:#96d248">{{user.lv}}</span>
+                                <span>{{user.lv_name}}</span>
                             </div>
                         </div>
                         <div class="action-list">
@@ -30,9 +30,22 @@
 <script>
 export default {
     name: 'UserInfoPanel',
+    props:{
+        user:{
+            default:function(){
+                return {
+                "lv":"Lv. 1",
+                "lv_name":"普通用户",
+                "avatar":"https://qwq.moe/img/avatar.jpg",
+                "username":"aaa"
+                }
+                
+            }
+        }
+    },
     data () {
         return {
-            'title':'goushi'
+            'title':'goushi',
         };
     }
 }

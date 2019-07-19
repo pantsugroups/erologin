@@ -3,8 +3,8 @@
         <div class="panel-title">书评区</div>
         <div class="comment-send">
             <div class="respond">
-                <textarea rows="8" name="text" id="textarea" class="textarea" placeholder="快来写下成为女装大佬的宣言吧！" required=""></textarea>
-                <a class="send" id="submit-comment">
+                <textarea rows="8" name="text" id="textarea" class="textarea" placeholder="快来写下成为女装大佬的宣言吧！" required="" v-model="text"></textarea>
+                <a class="send" id="submit-comment" v-on:click="send">
                     <svg style="width:50px;height:20px" viewBox="0 0 24 24">
                         <path fill="#666666" d="M2,21L23,12L2,3V10L17,12L2,14V21Z"></path>
                     </svg>
@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="comment-list">
-            <div class="comment-item" v-for="comment in comments">
+            <div class="comment-item" v-for="comment in comments" :key=comment>
                 <div class="avatar">
                     <img v-bind:src="comment.avatar" alt="">
                 </div>
@@ -34,9 +34,32 @@
 export default {
     name: 'CommentPanel',
     props:['comments'],
+    methods:{
+        send:function(){
+            fetch(this.$config.api_base+"light/comment/post/"+this.$route.params.id,{method: 'post',
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+        },credentials:"include"
+        ,
+          body:"content="+this.text
+          }).then(data=>data.json()).then(data=>{
+            if (data.code === 0){
+                this.$Notify('发送成功','发送成功!','background-color:#green');
+                setTimeout("location.reload()",3);
+                
+            }else{
+                this.$Notify('发送失败',data.msg,'background-color:#red');
+            }
+          }).catch(data=>{
+                this.$Notify('错误','未知错误!','background-color:#red');
+          }
+          )
+        }
+    },
     data () {
         return {
-            'title':'goushi'
+            'title':'goushi',
+            text:""
         };
     }
 }

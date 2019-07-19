@@ -10,21 +10,7 @@
       @onClick="handleClick"
     />
     <div class="BookManagementList" v-if="currentTab === 'tab1'">
-            <BookManagementItem />
-            <BookManagementItem />
-            <BookManagementItem />
-            <BookManagementItem />
-            <BookManagementItem />
-            <BookManagementItem />
-            <BookManagementItem />
-            <BookManagementItem />
-            <BookManagementItem />
-            <BookManagementItem />
-            <BookManagementItem />
-            <BookManagementItem />
-            <BookManagementItem />
-            <BookManagementItem />
-            <BookManagementItem />
+            <BookManagementItem v-for="n in novels" :key=n :book="n"/>
     </div>
 </div>
 </template>
@@ -34,8 +20,20 @@ import BookManagementItem from '../../Items/BookManagementItem.vue';
 export default {
     name: 'BookSettingsPanel',
     components:{Tabs,BookManagementItem},
+    created(){
+         fetch(this.$config.api_base+'auth/my_subscribe',{credentials:"include"}).then(data=>data.json()).then(data=>{
+      if (data.code===0){
+        data.data.novels.forEach(element => {
+          element.cover = this.$config.api_base+element.cover;
+          console.log(element);
+          this.novels.push(element);
+        });
+      }
+    })
+    },
     data () {
         return {
+            novels:[],
             tabs: [
             { title: ' 我的书架', value: 'tab1' }
         ],

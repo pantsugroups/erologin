@@ -6,7 +6,7 @@
         <div class="navbar-item">发现</div>
     </div>
     <div class="navbar-group">
-        <div class="navbar-item" v-on:click="testnotify">登录</div>
+        <div class="navbar-item" v-on:click="userinfo">{{data.navbar}}</div>
     </div>
 </div>
 </template>
@@ -14,12 +14,35 @@
 <script>
 export default {
   name: 'NavBar',
+  props:{
+
+  },
   data () {
-      return {};
+      return {
+          data:{
+              navbar:"登陆"
+          }
+      };
+  },
+  created(){
+      fetch(this.$config.api_base+'auth/fast_api',{credentials:"include"}).then(data=>data.json()).then(data=>{
+
+          if (data.code === -16){
+            this.data.navbar="登陆";
+          }else if(data.code === 0){
+              
+              this.data.navbar=data.data.nickname;
+          }
+      })
   },
   methods:{
-      testnotify:function(){
-          this.$Notify('测试','测试Notify!','background-color:#9d5321');
+      
+      userinfo:function(){
+          if (this.data.navbar == "登陆"){
+              this.$router.push({path:'/login'})
+          }else{
+              this.$router.push({path:'/settings/personal'})
+          }
       }
   }
 }

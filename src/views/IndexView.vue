@@ -13,29 +13,11 @@
     <br>
     <div class="panel indexlist-panel">
     <div class="indexlist-title">首页推荐</div>
-    <div class="book-list">
-      <BookListItem />
-      <BookListItem />
-      <BookListItem />
-      <BookListItem />
-      <BookListItem />
+    <div class="book-list" >
+
+      <BookListItem v-for="n in novels" :key=n :book="n" />
     </div>
-    <div class="indexlist-title">最近更新</div>
-    <div class="book-list">
-      <BookListItem />
-      <BookListItem />
-      <BookListItem />
-      <BookListItem />
-      <BookListItem />
-    </div>
-    <div class="indexlist-title">自暴自弃</div>
-    <div class="book-list">
-      <BookListItem />
-      <BookListItem />
-      <BookListItem />
-      <BookListItem />
-      <BookListItem />
-    </div>
+    
 
     </div>
     </div>
@@ -60,8 +42,21 @@ export default {
     IndexPersonalPanel,
     BookListItem
   },
+  created(){
+    fetch(this.$config.api_base+'light/novel/').then(data=>data.json()).then(data=>{
+      if (data.code===0){
+        data.data.novels.forEach(element => {
+          element.cover = this.$config.api_base+element.cover;
+          console.log(element);
+          this.novels.push(element);
+        });
+        
+      }
+    })
+  },
   data (){
     return {
+      novels:[],
       swiperOption: {
         spaceBetween: 30,
         effect: 'fade',

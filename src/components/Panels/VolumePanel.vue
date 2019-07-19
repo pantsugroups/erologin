@@ -1,85 +1,42 @@
 <template>
 <div class="panel volume-panel">
-  <div class="volume-list"> 
-    <div class="volume-item">
-      <div class="volume-cover"><img src="../../assets/volumes/volume4.jpg" /></div>
+  <div class="volume-list" > 
+    
+    <div class="volume-item" v-for="volume in volumes" :key="volume">
+      <div class="volume-cover"><img v-bind:src="volume.cover" /></div>
       <div class="volume-info">
-        <span class="volume-title">第10卷 赌博大乱斗！</span>
-        <span class="volume-updtime">更新日期：2018/10/23</span>
+        <span class="volume-title">{{volume.title}}</span>
+        <span class="volume-updtime">{{volume.update_time}}</span>
         <div class="volume-actions">
-          <a class="btn"><span class="mdi mdi-download"></span></a>
+          <a class="btn" v-on:click="download(volume.vid)" ><span class="mdi mdi-download"></span></a>
           <a class="btn"><span class="mdi mdi-sync"></span></a>
           <a class="btn"><span class="mdi mdi-bug"></span></a>
         </div>
       </div>
     </div>
-    <div class="volume-item">
-      <div class="volume-cover"><img src="../../assets/volumes/volume1.jpg" /></div>
-      <div class="volume-info">
-        <span class="volume-title">第11卷 大魔法师的妹妹</span>
-        <span class="volume-updtime">更新日期：2018/11/08</span>
-        <div class="volume-actions">
-          <a class="btn"><span class="mdi mdi-download"></span></a>
-          <a class="btn"><span class="mdi mdi-sync"></span></a>
-          <a class="btn"><span class="mdi mdi-bug"></span></a>
-        </div>
-      </div>
-    </div>
-    <div class="volume-item">
-      <div class="volume-cover"><img src="../../assets/volumes/volume6.jpg" /></div>
-      <div class="volume-info">
-        <span class="volume-title">第12卷 女骑士的摇篮曲</span>
-        <span class="volume-updtime">更新日期：2018/11/28</span>
-        <div class="volume-actions">
-          <a class="btn"><span class="mdi mdi-download"></span></a>
-          <a class="btn"><span class="mdi mdi-sync"></span></a>
-          <a class="btn"><span class="mdi mdi-bug"></span></a>
-        </div>
-      </div>
-    </div>
-    <div class="volume-item">
-      <div class="volume-cover"><img src="../../assets/volumes/volume5.jpg" /></div>
-      <div class="volume-info">
-        <span class="volume-title">第13卷 给巫妖的挑战书</span>
-        <span class="volume-updtime">更新日期：2018/12/18</span>
-        <div class="volume-actions">
-          <a class="btn"><span class="mdi mdi-download"></span></a>
-          <a class="btn"><span class="mdi mdi-sync"></span></a>
-          <a class="btn"><span class="mdi mdi-bug"></span></a>
-        </div>
-      </div>
-    </div>
-    <div class="volume-item">
-      <div class="volume-cover"><img src="../../assets/volumes/volume3.jpg" /></div>
-      <div class="volume-info">
-        <span class="volume-title">第14卷 红魔的试练</span>
-        <span class="volume-updtime">更新日期：2018/12/01</span>
-        <div class="volume-actions">
-          <a class="btn"><span class="mdi mdi-download"></span></a>
-          <a class="btn"><span class="mdi mdi-sync"></span></a>
-          <a class="btn"><span class="mdi mdi-bug"></span></a>
-        </div>
-      </div>
-    </div>
-    <div class="volume-item">
-      <div class="volume-cover"><img src="../../assets/volumes/volume2.jpg" /></div>
-      <div class="volume-info">
-        <span class="volume-title">第15卷 邪教综合征</span>
-        <span class="volume-updtime">更新日期：2018/12/18</span>
-        <div class="volume-actions">
-          <a class="btn"><span class="mdi mdi-download"></span></a>
-          <a class="btn"><span class="mdi mdi-sync"></span></a>
-          <a class="btn"><span class="mdi mdi-bug"></span></a>
-        </div>
-      </div>
-    </div>
+
   </div>
 </div>
 </template>
 <script>
 export default {
     name: 'VolumePanel',
-    props:['volumes']
+    props:['volumes'],
+    methods:{
+      download:function(vid){
+          fetch(this.$config.api_base+"light/stream/download/"+vid,{credentials:"include"}).then(data=>data.json()).then(data=>{
+            if(data.code === 0){
+              this.$Notify('成功','正在开始下载!','background-color:#green');
+              window.location.href=this.$config.api_base+"light/stream/"+data.downloads.file+"?token="+data.downloads.token+"&hash="+data.downloads.hash+"&name="+data.downloads.name;
+
+            }else{
+              this.$Notify('失败',data.msg,'background-color:#green');
+            }
+          }).catch(data=>{
+            this.$Notify('错误','未知错误!','background-color:#green');
+          })
+      }
+    }
 }
 </script>
 
