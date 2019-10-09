@@ -10,22 +10,22 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   routes: [
-    {
-      path: '/',
-      name: 'Index',
-      component: IndexView,
-      meta:{
-        title: '首页 · Ero Light'
-      }
-    },
-    {
-      path: '/book/:id',
-      name: 'Book',
-      component: BookView,
-      meta:{
-        title: '书籍 · Ero Light'
-      }
-    },
+    // {
+    //   path: '/',
+    //   name: 'Index',
+    //   component: IndexView,
+    //   meta:{
+    //     title: '首页 · Ero Light'
+    //   }
+    // },
+    // {
+    //   path: '/book/:id',
+    //   name: 'Book',
+    //   component: BookView,
+    //   meta:{
+    //     title: '书籍 · Ero Light'
+    //   }
+    // },
     {
       path: '/settings/:setpanel',
       name: 'Settings',
@@ -35,7 +35,7 @@ export default new Router({
       }
     },
     {
-      path: '/login',
+      path: '/',
       name: 'login',
       component: LoginView,
       meta:{
