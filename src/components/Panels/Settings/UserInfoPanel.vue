@@ -2,7 +2,7 @@
 <div class="panel userinfo-panel">
                         <div class="avatar"><img :src="user.avatar" alt=""></div>
                         <div class="user-info">
-                            <a>{{user.username}}</a>
+                            <a>{{user.nickname}}</a>
                             <div class="tags">
                                 <span style="background-color:#96d248">{{user.lv}}</span>
                                 <span>{{user.lv_name}}</span>

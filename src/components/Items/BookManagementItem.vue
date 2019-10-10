@@ -5,7 +5,7 @@
     <div class="book-detailed">
       <div class="book-cover-blur" v-bind:style="'background-image:url(' +book.cover+ ')'"></div>
       <div class="edit"><span class="mdi mdi-pencil"></span></div>
-      <div class="delete"><span class="mdi mdi-close"></span></div>
+      <div class="delete" ><span class="mdi mdi-close" @onClick="deleteClick"></span></div>
       <div class="full-title">{{ book.title }}</div>
       <div class="book-info">
         <div class="source"><span class="mdi mdi-calendar-clock"></span>2018-12-15</div>
@@ -22,6 +22,7 @@ export default {
         book: {
             default:function(){
                 return {
+                    id:0,
                     title:'胖次群的奇妙日常',
                     cover:'/static/bookUndefined.png',
                     publisher:'胖次Group',
@@ -32,6 +33,24 @@ export default {
                 }
             }
         }
+    },
+    methods:{
+    deleteClick(){
+let jwt = localStorage.getItem("jwt");
+        if (jwt == null){
+            localStorage.setItem("nickname",null);
+            location.href = '/';
+        }
+         fetch(this.$config.api_base+'novel/subscribe/'+book.id,{method: 'delete',credentials:"include",
+         headers: {
+    "Authorization": "Bearer "+jwt}}).then(data=>data.json()).then(data=>{
+      if (data.status===0){
+        this.$Notify('登陆成功',data.msg,'background-color:#9d5321');
+       
+      }
+    })
+    
+      }
     }
 }
 </script>

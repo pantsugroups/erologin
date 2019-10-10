@@ -37,23 +37,26 @@
     methods:{
       login:function(){
         console.log(this.data.username,this.data.passwd);
-          fetch(this.$config.api_base+"auth/login",{method: 'post',
+          fetch(this.$config.api_base+"user/login",{method: 'post',
           headers: {
     "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
   },credentials:"include",
-          body:"user="+this.data.username+"&passwd="+this.data.passwd
+          body:"username="+this.data.username+"&password="+this.data.passwd
           }).then(data=>data.json()).then(data=>{
-            if (data.code === 0){
+            
+            if (data.status === 0){
               // 登陆成功
               this.$Notify('登陆成功','欢迎回来!','background-color:#9d5321');
-              window.location.href="/";
+              console.log(data,data.token);
+              localStorage.setItem('jwt',data.token);
+              localStorage.setItem('nickname',data.data.nickname);
+              window.location.href="/settings/personal";
             }else{
-              alert(data.msg);
-              username="";
-              passwd="";
+              this.$Notify('登陆失败',data.msg,'background-color:#red');
             }
           }).catch(data=>{
-    this.$Notify('登陆失败','未知错误!','background-color:#red');
+            console.log(data);
+    this.$Notify('登陆失败',data.msg,'background-color:#red');
           }
             
           )

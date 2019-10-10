@@ -1,9 +1,11 @@
 <template>
 <div class="navbar padding-limiter">
     <div class="navbar-group">
-        <div class="navbar-logo navbar-item navbar-item-withicon"><span class="mdi mdi-book-open-variant"></span>Ero Light</div>
+        <div class="navbar-logo navbar-item navbar-item-withicon"><span class="mdi mdi-book-open-variant"></span>Ero Login</div>
         <router-link to="/" class="navbar-item">首页</router-link>
-        <div class="navbar-item">发现</div>
+        <div class="navbar-item">小说</div>
+        <div class="navbar-item">游戏</div>
+        <div class="navbar-item">博客</div>
     </div>
     <div class="navbar-group">
         <div class="navbar-item" v-on:click="userinfo">{{data.navbar}}</div>
@@ -25,21 +27,30 @@ export default {
       };
   },
   created(){
-      fetch(this.$config.api_base+'auth/fast_api',{credentials:"include"}).then(data=>data.json()).then(data=>{
+    //   fetch(this.$config.api_base+'auth/fast_api',{credentials:"include"}).then(data=>data.json()).then(data=>{
 
-          if (data.code === -16){
-            this.data.navbar="登陆";
-          }else if(data.code === 0){
+    //       if (data.code === -16){
+    //         this.data.navbar="登陆";
+    //       }else if(data.code === 0){
               
-              this.data.navbar=data.data.nickname;
-          }
-      })
+    //           this.data.navbar=data.data.nickname;
+    //       }
+    //   })
+    let a = localStorage.getItem("nickname");
+    console.log(1,a);
+    if ( a != null){
+        
+        this.data.navbar = localStorage.getItem("nickname")
+    }else{
+        this.data.navbar = "登陆";
+    }
+
   },
   methods:{
       
       userinfo:function(){
           if (this.data.navbar == "登陆"){
-              this.$router.push({path:'/login'})
+              this.$router.push({path:'/'})
           }else{
               this.$router.push({path:'/settings/personal'})
           }

@@ -21,12 +21,19 @@ export default {
     name: 'BookSettingsPanel',
     components:{Tabs,BookManagementItem},
     created(){
-         fetch(this.$config.api_base+'auth/my_subscribe',{credentials:"include"}).then(data=>data.json()).then(data=>{
-      if (data.code===0){
-        data.data.novels.forEach(element => {
-          element.cover = this.$config.api_base+element.cover;
-          console.log(element);
-          this.novels.push(element);
+      let jwt = localStorage.getItem("jwt");
+        if (jwt == null){
+            localStorage.setItem("nickname",null);
+            location.href = '/';
+        }
+         fetch(this.$config.api_base+'user/book',{credentials:"include",
+         headers: {
+    "Authorization": "Bearer "+jwt}}).then(data=>data.json()).then(data=>{
+      if (data.status===0){
+        data.data.forEach(element => {
+        element.publisher = '胖次Group'
+        
+        this.novels.push(element);
         });
       }
     })

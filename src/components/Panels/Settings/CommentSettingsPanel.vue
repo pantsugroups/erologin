@@ -10,12 +10,7 @@
       @onClick="handleClick"
     />
         <div v-if="currentTab === 'tab1'">
-            <MyCommentItem />
-            <MyCommentItem />
-            <MyCommentItem />
-            <MyCommentItem />
-            <MyCommentItem />
-            <MyCommentItem />
+            <MyCommentItem v-for="c in comments" :key=c :comment="c"/>
     </div>
 </div>
 </template>
@@ -31,9 +26,36 @@ export default {
             { title: ' 我的评论', value: 'tab1' }
         ],
         currentTab: 'tab1',
+        comments:[],
         };
     },
+    created(){
+      let jwt = localStorage.getItem("jwt");
+        if (jwt == null){
+            localStorage.setItem("nickname",null);
+            location.href = '/';
+        }
+         fetch(this.$config.api_base+'user/comments',{credentials:"include",
+         headers: {
+    "Authorization": "Bearer "+jwt}}).then(data=>data.json()).then(data=>{
+      if (data.status===0){
+        data.data.forEach(element => {
+          element.content = "<p>"+element.title+"</p>";
+          if(element.type == 1){
+            element.origin = "/game/"+element.raw;
+          }else{
+            element.origin = "/novel/"+element.raw;
+          }
+          element.originName = element.raw_title;
+          element.time = element.time;
+          element.author =  element.author_name;
+          this.comments.push(element);
+        });
+      }
+    })
+    },
     methods: {
+    
     handleClick(newTab) {
       this.currentTab = newTab;
     },
