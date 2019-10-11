@@ -9,6 +9,7 @@
             <PushSettingsPanel v-if="this.$route.params.setpanel === 'push'" />
             <CommentSettingsPanel v-if="this.$route.params.setpanel === 'comment'" />
             <BookSettingsPanel v-if="this.$route.params.setpanel === 'book'" />
+            <UploadPanel v-if="this.$route.params.setpanel === 'upload'" />
         </div>
     </div>
 </div>
@@ -21,6 +22,8 @@ import PersonalSettingsPanel from '../components/Panels/Settings/PersonalSetting
 import PushSettingsPanel from '../components/Panels/Settings/PushSettingsPanel.vue'
 import CommentSettingsPanel from '../components/Panels/Settings/CommentSettingsPanel.vue'
 import BookSettingsPanel from '../components/Panels/Settings/BookSettingsPanel.vue'
+import UploadPanel from '../components/Panels/Settings/UploadPanel.vue'
+
 export default {
     name: 'SettingsView',
     components: {
@@ -28,7 +31,8 @@ export default {
         PushSettingsPanel,
         PersonalSettingsPanel,
         CommentSettingsPanel,
-        BookSettingsPanel
+        BookSettingsPanel,
+        UploadPanel
     },
     created(){
         let jwt = localStorage.getItem("jwt");

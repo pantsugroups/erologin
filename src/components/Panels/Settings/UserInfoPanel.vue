@@ -23,7 +23,10 @@
                             </router-link>
                         </div>
                         <div class="shortcut-list">
-                            <div class="btn" style="background-color:#67b72b"><span class="mdi mdi-cloud-upload"></span> 上传书籍</div>
+                            <router-link to="/settings/upload" class="action-item">
+                            <div class="btn" style="background-color:#67b72b"
+                            v-if="user.lv_name =='管理员'"><span class="mdi mdi-cloud-upload"></span> 创建书籍 / 游戏</div>
+                            </router-link>
                         </div>
                     </div>
 </template>

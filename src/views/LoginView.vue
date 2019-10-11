@@ -34,6 +34,13 @@
     name: 'LoginView',
     
     components: {},
+    created(){
+      let jwt = localStorage.getItem("jwt");
+        if (jwt != null){
+            localStorage.setItem("nickname",null);
+            location.href = '/settings/personal';
+        }
+    },
     methods:{
       login:function(){
         console.log(this.data.username,this.data.passwd);

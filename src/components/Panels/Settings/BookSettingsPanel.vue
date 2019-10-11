@@ -42,7 +42,9 @@ export default {
         return {
             novels:[],
             tabs: [
-            { title: ' 我的书架', value: 'tab1' }
+            { title: ' 我的书架', value: 'tab1' },
+            { title: ' 管理书籍', value: 'tab2' },
+            { title: ' 管理文章', value: 'tab3' }
         ],
         currentTab: 'tab1',
         };

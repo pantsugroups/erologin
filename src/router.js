@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import BookView from '@/views/BookView.vue'
-import IndexView from '@/views/IndexView.vue'
+//import BookView from '@/views/BookView.vue'
+//import IndexView from '@/views/IndexView.vue'
 import SettingsView from '@/views/SettingsView.vue'
 import LoginView from '@/views/LoginView.vue'
 

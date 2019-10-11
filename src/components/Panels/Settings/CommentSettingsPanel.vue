@@ -23,7 +23,8 @@ export default {
     data () {
         return {
             tabs: [
-            { title: ' 我的评论', value: 'tab1' }
+            { title: ' 我的评论', value: 'tab1' },
+            { title: ' 管理评论', value: 'tab2' }
         ],
         currentTab: 'tab1',
         comments:[],
