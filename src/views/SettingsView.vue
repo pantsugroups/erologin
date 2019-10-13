@@ -8,7 +8,7 @@
             <PersonalSettingsPanel v-if="this.$route.params.setpanel === 'personal'" />
             <PushSettingsPanel v-if="this.$route.params.setpanel === 'push'" />
             <CommentSettingsPanel v-if="this.$route.params.setpanel === 'comment'" />
-            <BookSettingsPanel v-if="this.$route.params.setpanel === 'book'" />
+            <BookSettingsPanel v-bind:user="this.user" v-if="this.$route.params.setpanel === 'book'" />
             <UploadPanel v-if="this.$route.params.setpanel === 'upload'" />
         </div>
     </div>

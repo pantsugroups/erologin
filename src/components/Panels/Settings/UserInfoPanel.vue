@@ -21,6 +21,9 @@
                             <router-link to="/settings/book" class="action-item">
                                 <span class="mdi mdi-library-books"></span> 书籍管理
                             </router-link>
+                            <!-- <router-link to="/settings/content" class="action-item"  v-if="user.lv_name =='管理员'">
+                                <span class="mdi mdi-library-books"></span> 内容管理
+                            </router-link> -->
                         </div>
                         <div class="shortcut-list">
                             <router-link to="/settings/upload" class="action-item">

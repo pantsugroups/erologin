@@ -4,11 +4,11 @@
     <div class="book-title">{{ book.title }}</div>
     <div class="book-detailed">
       <div class="book-cover-blur" v-bind:style="'background-image:url(' +book.cover+ ')'"></div>
-      <div class="edit"><span class="mdi mdi-pencil"></span></div>
+      <router-link v-bind:to="'/settings/upload?'+book.type+'='+book.id" class="edit"><span class="mdi mdi-pencil"></span></router-link>
       <div class="delete" ><span class="mdi mdi-close" @onClick="deleteClick"></span></div>
       <div class="full-title">{{ book.title }}</div>
       <div class="book-info">
-        <div class="source"><span class="mdi mdi-calendar-clock"></span>2018-12-15</div>
+        <div class="source"><span class="mdi mdi-calendar-clock"></span>{{book.update_time}}</div>
         <div class="author"><span class="mdi mdi-account-edit"></span>{{ book.author }}</div>
       </div>
     </div>
@@ -23,9 +23,11 @@ export default {
             default:function(){
                 return {
                     id:0,
+                    type:"novelid",
                     title:'胖次群的奇妙日常',
                     cover:'/static/bookUndefined.png',
                     publisher:'胖次Group',
+                    update_time,
                     author:'Ero Devs',
                     description:'一群死宅要凉技术宅的日常聊(si)天(bi)',
                     tags:'日常 / 女装 / 死宅'

@@ -4,7 +4,7 @@
 
   </div>
   <div class="meta">
-  {{ comment.author }} {{ comment.time }}在 <router-link v-bind:to="comment.origin">{{ comment.originName }}</router-link>评论道
+  {{ comment.author }} 在 <router-link v-bind:to="comment.origin">{{ comment.originName }}</router-link>评论道
   </div>
 </div>
 </template>

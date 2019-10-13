@@ -12,6 +12,12 @@
     <div class="BookManagementList" v-if="currentTab === 'tab1'">
             <BookManagementItem v-for="n in novels" :key=n :book="n"/>
     </div>
+    <div class="BookManagementList" v-if="currentTab === 'tab2'&& user.lv_name == '管理员'">
+            <BookManagementItem v-for="n in all_novels" :key=n :book="n"/>
+    </div>
+    <div class="BookManagementList" v-if="currentTab === 'tab3'&& user.lv_name == '管理员'">
+            <BookManagementItem v-for="n in all_archive" :key=n :book="n"/>
+    </div>
 </div>
 </template>
 <script>
@@ -20,7 +26,24 @@ import BookManagementItem from '../../Items/BookManagementItem.vue';
 export default {
     name: 'BookSettingsPanel',
     components:{Tabs,BookManagementItem},
+    props:{
+        user:{
+            default:function(){
+                return {
+                "lv":"Lv. 1",
+                "lv_name":"普通用户",
+                "avatar":"https://qwq.moe/img/avatar.jpg",
+                "username":"aaa"
+                }
+                
+            }
+        }
+    },
     created(){
+      if (this.user.lv_name == "管理员"){
+        this.tabs.push({ title: ' 管理书籍', value: 'tab2' },
+            { title: ' 管理文章', value: 'tab3' });
+      }
       let jwt = localStorage.getItem("jwt");
         if (jwt == null){
             localStorage.setItem("nickname",null);
@@ -29,22 +52,48 @@ export default {
          fetch(this.$config.api_base+'user/book',{credentials:"include",
          headers: {
     "Authorization": "Bearer "+jwt}}).then(data=>data.json()).then(data=>{
-      if (data.status===0){
+      if (data.status===0 && data.count != 0){
         data.data.forEach(element => {
         element.publisher = '胖次Group'
-        
+        element.update_time = new Date(element.created_at)
         this.novels.push(element);
         });
       }
     })
+    fetch(this.$config.api_base+'novel/',{credentials:"include",
+         headers: {
+    "Authorization": "Bearer "+jwt}}).then(data=>data.json()).then(data=>{
+      if (data.status===0 && data.count != 0){
+        data.data.forEach(element => {
+        element.publisher = '胖次Group'
+        element.type = 'novelid';
+        element.update_time = new Date(element.created_at)
+        this.all_novels.push(element);
+        });
+      }
+    })
+    fetch(this.$config.api_base+'archive/',{credentials:"include",
+         headers: {
+    "Authorization": "Bearer "+jwt}}).then(data=>data.json()).then(data=>{
+      if (data.status===0 && data.count != 0){
+        data.data.forEach(element => {
+        element.publisher = '胖次Group'
+        element.type = 'archiveid';
+        element.update_time = new Date(element.created_at)
+        this.all_archive.push(element);
+        });
+      }
+    })
     },
+    
     data () {
         return {
             novels:[],
+            all_novels:[],
+            all_archive:[],
             tabs: [
             { title: ' 我的书架', value: 'tab1' },
-            { title: ' 管理书籍', value: 'tab2' },
-            { title: ' 管理文章', value: 'tab3' }
+            
         ],
         currentTab: 'tab1',
         };
