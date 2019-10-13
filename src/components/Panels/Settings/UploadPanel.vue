@@ -21,7 +21,7 @@
               <label>封面地址</label>
               <div class="controls">
                 <input type="text" title="封面地址" value="" v-model="cover"></div>
-                <button>上传</button>
+              
             </div>
             <div class="control-group">
               <label>日文标题</label>
@@ -35,8 +35,10 @@
             </div>
             <div class="control-group">
               <label>内容</label>
-              <div class="controls" style="width:100%">
+              <div class="controls" style="width:100%;height:200px">
                 <textarea title="内容" orgname="内容" rows=8 v-model="content"></textarea>
+                <label>预览</label>
+                <vue-markdown id="markdown" :source="content" />
               </div>
             </div>
             <div class="control-group">
@@ -48,18 +50,22 @@
             <div class="controls actions">
                 <button>保存</button>
             </div>
+            <div class="control-group">
+              <button>上传图片：</button><input type="text" title="Tags" value="" v-model="tags"></div><label class="tips">结果~</label>
+            </div>
       </div>
       <div v-if="currentTab === 'tab2'">
         
       </div>
     </div>
-</div>
+
 </template>
 <script>
 import Tabs from 'vue-tabs-with-active-line';
+import VueMarkdown from "vue-markdown";
 export default {
     name: 'PersonalSettingsPanel',
-    components:{Tabs},
+    components:{Tabs,VueMarkdown},
     data () {
         return {
             tabs: [
