@@ -36,9 +36,9 @@
     components: {},
     created(){
       let jwt = localStorage.getItem("jwt");
-        if (jwt != null){
+        if (jwt != null && jwt != "null"){
             localStorage.setItem("nickname",null);
-            location.href = '/settings/personal';
+            // location.href = '/settings/personal';
         }
     },
     methods:{

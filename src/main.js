@@ -8,10 +8,13 @@ import config from './config'
 import Notify from './plugins/Notify'
 import VueCookies from 'vue-cookies'
 
+
 import '@mdi/font/css/materialdesignicons.css'
 
 Vue.use(Notify)
 Vue.use(VueCookies)
+
+
 Vue.prototype.$config = config
 
 

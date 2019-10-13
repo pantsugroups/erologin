@@ -38,9 +38,9 @@ export default {
         let jwt = localStorage.getItem("jwt");
         if (jwt == null){
             localStorage.setItem("nickname",null);
-            location.href = '/';
+            // location.href = '/';
         }
-        fetch(this.$config.api_base+'user/',{credentials:"include",headers: {
+        fetch(this.$config.api_base+'user/',{methods:"GET",credentials:"include",headers: {
     "Authorization": "Bearer "+jwt,
   }}).then(data=>data.json()).then(data=>{
             this.user = data.data;
@@ -61,6 +61,8 @@ export default {
                 this.user.lv = -1;
             }
             this.user.lv = "Lv. "+this.user.lv
+        }).catch(data=>{
+            console.log(data);
         })
        
     },

@@ -37,8 +37,8 @@ export default {
     //       }
     //   })
     let a = localStorage.getItem("nickname");
-    console.log(1,a);
-    if ( a != null){
+    
+    if ( a != null && a != "null"){
         
         this.data.navbar = localStorage.getItem("nickname")
     }else{
