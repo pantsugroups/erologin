@@ -1,6 +1,7 @@
 <template>
-<div class="panel indexpersonal-panel">
-  <tabs class="tabs-index"
+  <div class="panel indexpersonal-panel">
+    <tabs
+      class="tabs-index"
       :tabs="tabs"
       :currentTab="currentTab"
       :wrapper-class="'default-tabs'"
@@ -25,63 +26,63 @@
         <p>你这个让我咋写嘛.jpg</p>
       </div>
     </div>
-</div>
+  </div>
 </template>
 <script>
-import Tabs from 'vue-tabs-with-active-line';
+import Tabs from "vue-tabs-with-active-line";
 export default {
-    name: 'IndexPersonalPanel',
-    components:{Tabs},
-    data: () => ({
-      tabs: [
-        { title: ' 动态', value: 'tab1' },
-        { title: ' 消息', value: 'tab2' },
-        { title: ' 个人', value: 'tab3', }
-      ],
-      currentTab: 'tab1',
-    }),
+  name: "IndexPersonalPanel",
+  components: { Tabs },
+  data: () => ({
+    tabs: [
+      { title: " 动态", value: "tab1" },
+      { title: " 消息", value: "tab2" },
+      { title: " 个人", value: "tab3" }
+    ],
+    currentTab: "tab1"
+  }),
   methods: {
     handleClick(newTab) {
       this.currentTab = newTab;
-    },
+    }
   }
-}
+};
 </script>
 <style lang="less">
-.indexpersonal-panel{
-    flex-shrink:0;
-    background-color:transparent;
-    margin-left:30px;
-    height:350px;
-    overflow:hidden;
-    padding:0;
-    display:flex;
-    flex-direction:column;
-    .content{
-    width:100%;
+.indexpersonal-panel {
+  flex-shrink: 0;
+  background-color: transparent;
+  margin-left: 30px;
+  height: 350px;
+  overflow: hidden;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  .content {
+    width: 100%;
     background-color: rgba(245, 245, 245, 0.8);
-      padding:10px 30px;
-      color:#555;
-      height:100%;
-    }
+    padding: 10px 30px;
+    color: #555;
+    height: 100%;
+  }
 }
 .tabs-index {
-width:100%;
-    flex-shrink: 0;
-    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.05);
-  margin:0px 30px;
-      background-color: rgba(255,255,255,0.8);
+  width: 100%;
+  flex-shrink: 0;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.05);
+  margin: 0px 30px;
+  background-color: rgba(255, 255, 255, 0.8);
   position: relative;
-  display:flex;
+  display: flex;
   margin: 0 auto;
 
   .tabs__item {
-  font-family:"Material Design Icons";
-  width:100%;
+    font-family: "Material Design Icons";
+    width: 100%;
     display: inline-block;
     margin: 0;
     padding: 12px 0;
-    
+
     font-size: 16px;
     letter-spacing: 0.8px;
     color: gray;
@@ -96,7 +97,6 @@ width:100%;
   .tabs__item_active {
     color: #333;
   }
-
 
   .tabs__item:focus {
     outline: none;
@@ -119,6 +119,4 @@ width:100%;
     transition: transform 0.4s ease, width 0.4s ease;
   }
 }
-
-
 </style>
