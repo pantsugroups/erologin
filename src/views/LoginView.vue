@@ -44,11 +44,15 @@
     methods:{
       login:function(){
         console.log(this.data.username,this.data.passwd);
-          fetch(this.$config.api_base+"user/login",{method: 'post',
-          headers: {
-    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
-  },credentials:"include",
-          body:"username="+this.data.username+"&password="+this.data.passwd
+          fetch(this.$config.api_base+"user/login",
+          {
+            method: 'post',
+            mode: 'cors',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+            },
+            credentials:"include",
+            body:"username="+this.data.username+"&password="+this.data.passwd
           }).then(data=>data.json()).then(data=>{
             
             if (data.status === 0){

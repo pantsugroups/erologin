@@ -5,7 +5,7 @@
     <div class="book-detailed">
       <div class="book-cover-blur" v-bind:style="'background-image:url(' +book.cover+ ')'"></div>
       <router-link v-bind:to="'/settings/upload?'+book.type+'='+book.id" class="edit"><span class="mdi mdi-pencil"></span></router-link>
-      <div class="delete" ><span class="mdi mdi-close" @onClick="deleteClick"></span></div>
+      <div class="delete" @click="deleteClick"><span class="mdi mdi-close" ></span></div>
       <div class="full-title">{{ book.title }}</div>
       <div class="book-info">
         <div class="source"><span class="mdi mdi-calendar-clock"></span>{{book.update_time}}</div>
@@ -19,6 +19,7 @@
 export default {
     name: 'BookManagementItem',
     props:{
+        types:"",
         book: {
             default:function(){
                 return {
@@ -36,21 +37,59 @@ export default {
             }
         }
     },
+  
     methods:{
     deleteClick(){
-let jwt = localStorage.getItem("jwt");
+        console.log(1)
+        let jwt = localStorage.getItem("jwt");
         if (jwt == null){
             localStorage.setItem("nickname",null);
             location.href = '/';
         }
-         fetch(this.$config.api_base+'novel/subscribe/'+book.id,{method: 'delete',credentials:"include",
+
+        
+            if(this.book.type=="novelid"){
+              fetch(this.$config.api_base+'novel/'+this.book.id,
+              {
+                method: 'delete',
+                credentials:"include",
+                headers: {
+                "Authorization": "Bearer "+jwt
+                }
+              }).then(data=>data.json()).then(data=>{
+                if (data.status===0){
+                this.$Notify('成功',data.msg,'background-color:#9d5321');
+                }else{
+                this.$Notify('失败',data.msg,'background-color:#9d5321');
+                }
+              })
+            }else if(this.book.type=="archiveid"){
+              fetch(this.$config.api_base+'archive/'+this.book.id,
+              {
+                method: 'delete',
+                credentials:"include",
+                headers: {
+                "Authorization": "Bearer "+jwt
+                }
+              }).then(data=>data.json()).then(data=>{
+                if (data.status===0){
+                this.$Notify('成功',data.msg,'background-color:#9d5321');
+                }else{
+                this.$Notify('失败',data.msg,'background-color:#9d5321');
+                }
+              })
+            }else{
+        fetch(this.$config.api_base+'novel/subscribe/'+this.book.id,{method: 'delete',credentials:"include",
          headers: {
     "Authorization": "Bearer "+jwt}}).then(data=>data.json()).then(data=>{
       if (data.status===0){
-        this.$Notify('登陆成功',data.msg,'background-color:#9d5321');
-       
+        this.$Notify('成功',data.msg,'background-color:#9d5321');
+      }else{
+        this.$Notify('失败',data.msg,'background-color:#9d5321');
       }
     })
+        }
+         
     
       }
     }

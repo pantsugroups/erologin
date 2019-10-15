@@ -40,9 +40,15 @@ export default {
             localStorage.setItem("nickname",null);
             // location.href = '/';
         }
-        fetch(this.$config.api_base+'user/',{methods:"GET",credentials:"include",headers: {
-    "Authorization": "Bearer "+jwt,
-  }}).then(data=>data.json()).then(data=>{
+        fetch(this.$config.api_base+'user/',
+        {
+            methods:"get",
+            credentials:"include",
+            mode: 'cors',
+            headers: {
+                "Authorization": "Bearer "+jwt,
+                }
+            }).then(data=>data.json()).then(data=>{
             this.user = data.data;
             if(this.user.avatar == ""){
                 this.user.avatar = "https://qwq.moe/img/avatar.jpg"

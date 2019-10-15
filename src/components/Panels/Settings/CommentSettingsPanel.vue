@@ -39,7 +39,7 @@ export default {
          fetch(this.$config.api_base+'user/comments',{credentials:"include",
          headers: {
     "Authorization": "Bearer "+jwt}}).then(data=>data.json()).then(data=>{
-      if (data.status===0){
+      if (data.status===0&&data.count != 0){
         data.data.forEach(element => {
           element.content = "<p>"+element.title+"</p>";
           if(element.type == 1){

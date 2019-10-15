@@ -17,9 +17,10 @@
               @change="updateCover($event)"
               accept="image/png, image/jpeg, image/bmp"
               />
-              <br>
+      </div><div class="control-group">
               <label>上传结果：</label>
               <input type="text" title="file" value="" v-model="file"></div>
+              <br>
               <br>
     <div v-if="currentTab === 'tab1'">
         <div class="control-group">
@@ -140,7 +141,49 @@
                   <button v-on:click="CreateNovel">保存</button>
               </div>
           </div>
+          <div v-if="currentTab === 'tab4'">
+            <div class="control-group">
+          <label>分类名称</label>
+        <div class="controls"><input type="text" title="作者" value="" v-model="category"></div>
+        <div class="controls actions">
+        <select v-model="selected1">
+        <option value="1">小说</option>
+        <option value="2">文章</option>
+        </select>
+        </div>
+        
+        <button v-on:click="CreateCategory">添加</button>
+         </div>  
+
+
+        <div class="control-group">
+          <label>小说分类</label>
+        <select v-model="selected2">
+        <option v-for="novel in novelList" :key=novel v-bind:value="novel.key">
+          {{ novel.value }}
+          </option>
+        </select>
+
+        </div>
+        <div class="controls actions">
+        <button >删除</button>
+         </div>
+        <div class="control-group">
+          <label>文章分类</label>
+        <select v-model="selected3">
+        <option v-for="archive in archiveList" :key=archive v-bind:value="archive.key">
+          {{ archive.value }}
+          </option>
+        </select>
+
+        </div>
+        <div class="controls actions">
+        <button >删除</button>
+         </div>
+
       </div>
+      </div>
+      
       
     </div>
 
@@ -179,6 +222,31 @@ export default {
           }
         })
       }
+      fetch(this.$config.api_base+'category/',
+        {
+          method: 'get',
+          mode: 'cors',
+          credentials: 'include',
+          headers: {
+
+          //  "Authorization": "Bearer "+jwt,
+          //  'Content-Type': 'multipart/form-data',
+        },
+        }).then(data=>data.json()).then(data=>{
+          console.log(data);
+          if (data.status == 0 && data.count != 0){
+            data.data.forEach(
+              Element=>{
+                if (Element.type == 1){
+                  this.novelList.push({"key":Element.id,"value":Element.title})
+                }else if (Element.type == 2){
+                  this.archiveList.push({"key":Element.id,"value":Element.title})
+                }
+              }
+            )
+          }
+        })
+      
       if (nid != undefined){
         this.novel.id = nid;
         this.currentTab = "tab2";
@@ -207,11 +275,23 @@ export default {
     },
     data () {
         return {
+          selected1: "",
+          selected2: "",
+          selected3: "",
+          category:"",
+            novelList:[
+
+            ],
+            archiveList:[
+
+            ],
             tabs: [
             { title: ' 创建文章', value: 'tab1' },
             { title: ' 创建小说', value: 'tab2' },
             { title: ' 添加分卷', value: 'tab3' },
+            { title: ' 分类管理', value: 'tab4' },
         ],
+        unitName:'请选择',
         archive:{
         id:0,
         
@@ -246,6 +326,7 @@ export default {
         };
     },
     methods: {
+      
       upVolume(event){
         console.log(event.target.files[0]);
         var formData = new FormData();
@@ -273,9 +354,7 @@ export default {
           }else{
             this.volume.file = 0;
             this.$Notify('失败','文件上传失败','background-color:#4eb739');
-          }
-
-  })
+          }})
       },
       updateCover(event) {
       console.log(event.target.files[0]);
@@ -308,6 +387,36 @@ export default {
 
   })
 
+    },
+    CreateCategory(){
+      var formData = new FormData();
+      formData.append("title",this.category);
+      formData.append("type",this.selected1);
+      let jwt = localStorage.getItem("jwt");
+        if (jwt == null){
+            this.$Notify('失败','您的登陆凭据已到期','background-color:#4eb739');
+        } 
+        fetch(this.$config.api_base+'category/',
+        {
+          method: 'POST',
+          mode: 'cors',
+          credentials: 'include',
+          headers: {
+
+           "Authorization": "Bearer "+jwt,
+          //  'Content-Type': 'multipart/form-data',
+        },
+        body:formData
+        }).then(data=>data.json()).then(data=>{
+          if (data.status == 0){
+            
+            this.$Notify('成功','添加成功','background-color:#4eb739');
+          }else{
+            
+            this.$Notify('失败','添加失败','background-color:#4eb739');
+          }
+
+  })
     },
     CreateArchive(){
         let jwt = localStorage.getItem("jwt");

@@ -13,10 +13,10 @@
             <BookManagementItem v-for="n in novels" :key=n :book="n"/>
     </div>
     <div class="BookManagementList" v-if="currentTab === 'tab2'&& user.lv_name == '管理员'">
-            <BookManagementItem v-for="n in all_novels" :key=n :book="n"/>
+            <BookManagementItem v-for="n in all_novels" :key=n :book="n" :type1="type1"/>
     </div>
     <div class="BookManagementList" v-if="currentTab === 'tab3'&& user.lv_name == '管理员'">
-            <BookManagementItem v-for="n in all_archive" :key=n :book="n"/>
+            <BookManagementItem v-for="n in all_archive" :key=n :book="n" :type1="type1"/>
     </div>
 </div>
 </template>
@@ -27,6 +27,7 @@ export default {
     name: 'BookSettingsPanel',
     components:{Tabs,BookManagementItem},
     props:{
+        
         user:{
             default:function(){
                 return {
@@ -49,37 +50,36 @@ export default {
             localStorage.setItem("nickname",null);
             location.href = '/';
         }
-         fetch(this.$config.api_base+'user/book',{credentials:"include",
-         headers: {
-    "Authorization": "Bearer "+jwt}}).then(data=>data.json()).then(data=>{
+         fetch(this.$config.api_base+'user/book?page_size=30',{credentials:"include",headers: {
+    "Authorization": "Bearer "+jwt}
+         }).then(data=>data.json()).then(data=>{
       if (data.status===0 && data.count != 0){
         data.data.forEach(element => {
         element.publisher = '胖次Group'
-        element.update_time = new Date(element.created_at)
+        element.update_time = new Date(parseInt(element.created_at) * 1000).toLocaleString().replace(/:\d{1,2}$/,' '); 
         this.novels.push(element);
         });
       }
     })
-    fetch(this.$config.api_base+'novel/',{credentials:"include",
-         headers: {
-    "Authorization": "Bearer "+jwt}}).then(data=>data.json()).then(data=>{
+    fetch(this.$config.api_base+'novel/?page_size=30',{credentials:"include",
+        }).then(data=>data.json()).then(data=>{
       if (data.status===0 && data.count != 0){
         data.data.forEach(element => {
         element.publisher = '胖次Group'
         element.type = 'novelid';
-        element.update_time = new Date(element.created_at)
+        element.update_time = new Date(parseInt(element.created_at) * 1000).toLocaleString().replace(/:\d{1,2}$/,' '); 
+        element.author = element.create_name;
         this.all_novels.push(element);
         });
       }
     })
-    fetch(this.$config.api_base+'archive/',{credentials:"include",
-         headers: {
-    "Authorization": "Bearer "+jwt}}).then(data=>data.json()).then(data=>{
+    fetch(this.$config.api_base+'archive/?page_size=30',{credentials:"include",
+         }).then(data=>data.json()).then(data=>{
       if (data.status===0 && data.count != 0){
         data.data.forEach(element => {
         element.publisher = '胖次Group'
         element.type = 'archiveid';
-        element.update_time = new Date(element.created_at)
+        element.update_time = new Date(parseInt(element.created_at) * 1000).toLocaleString().replace(/:\d{1,2}$/,' '); 
         this.all_archive.push(element);
         });
       }
@@ -88,6 +88,7 @@ export default {
     
     data () {
         return {
+            type1:"admin",
             novels:[],
             all_novels:[],
             all_archive:[],
