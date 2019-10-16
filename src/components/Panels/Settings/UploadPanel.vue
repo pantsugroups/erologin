@@ -151,7 +151,7 @@
           <input type="file" @change="upVolume($event)" accept="epub/epub" />
         </div>
         <div class="controls actions">
-          <button v-on:click="CreateNovel">保存</button>
+          <button v-on:click="CreateVolume">保存</button>
         </div>
         <div v-if="novel.id !== 0">
           <div class="control-group">
@@ -419,7 +419,9 @@ export default {
         .then(data => data.json())
         .then(data => {
           if (data.status == 0) {
-            this.volume.file = data.id;
+            
+            this.volume.file = data.data.id;
+            
             this.$Notify("成功", "文件上传成功", "background-color:#4eb739");
           } else {
             this.volume.file = 0;
@@ -549,13 +551,14 @@ export default {
       let jwt = localStorage.getItem("jwt");
       if (jwt == null || jwt == "null") {
         this.$Notify("失败", "您的登陆凭据已到期", "background-color:#4eb739");
+        this.$cookies.remove("token")
       }
       var formData = new FormData();
       formData.append("title", this.novel.title);
       formData.append("author", this.novel.author);
       formData.append("description", this.novel.description);
       formData.append("cover", this.novel.cover);
-      formData.append("tag", this.novel.tags);
+      formData.append("tags", this.novel.tags);
       formData.append("ended", this.novel.ended);
       if (this.novel.id == 0) {
         var url = this.$config.api_base + "novel/";
@@ -586,17 +589,18 @@ export default {
       let jwt = localStorage.getItem("jwt");
       if (jwt == null || jwt == "null") {
         this.$Notify("失败", "您的登陆凭据已到期", "background-color:#4eb739");
+        this.$cookies.remove("token")
       }
       if (this.volume.file == 0) {
         this.$Notify("失败", "请先上传分卷", "background-color:#4eb739");
       }
       var formData = new FormData();
-      formData.append("id", this.volume.novelid);
+      // formData.append("id", this.volume.novelid);
       formData.append("title", this.volume.title);
       formData.append("file", this.volume.file);
       formData.append("cover", this.volume.cover);
 
-      fetch(this.$config.api_base + "volume/", {
+      fetch(this.$config.api_base + "volume/"+this.volume.novelid, {
         method: "post",
         mode: "cors",
         credentials: "include",
