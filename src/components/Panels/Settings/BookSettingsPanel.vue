@@ -11,13 +11,13 @@
       @onClick="handleClick"
     />
     <div class="BookManagementList" v-if="currentTab === 'tab1'">
-      <BookManagementItem v-for="n in novels" :key="n" :book="n" />
+      <BookManagementItem v-for="n in novels" :key="n.id" :book="n" />
     </div>
     <div class="BookManagementList" v-if="currentTab === 'tab2'&& user.lv_name == '管理员'">
-      <BookManagementItem v-for="n in all_novels" :key="n" :book="n" :types="type1" />
+      <BookManagementItem v-for="n in all_novels" :key="n.id" :book="n" :types="type1" />
     </div>
     <div class="BookManagementList" v-if="currentTab === 'tab3'&& user.lv_name == '管理员'">
-      <BookManagementItem v-for="n in all_archive" :key="n" :book="n" :types="type1" />
+      <BookManagementItem v-for="n in all_archive" :key="n.id" :book="n" :types="type1" />
     </div>
   </div>
 </template>

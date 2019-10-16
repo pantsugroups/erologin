@@ -3,9 +3,9 @@
     <div class="navbar-group">
         <div class="navbar-logo navbar-item navbar-item-withicon"><span class="mdi mdi-book-open-variant"></span>Ero Login</div>
         <router-link to="/" class="navbar-item">首页</router-link>
-        <router-link to="https://light.ero.ink/" class="navbar-item">小说</router-link>
-        <router-link to="https://gal.ero.ink/" class="navbar-item">游戏</router-link>
-        <router-link to="https://blog.ero.ink/" class="navbar-item">博客</router-link>
+        <div class="navbar-item"><a href="https://light.ero.ink/">小说</a></div>
+        <div class="navbar-item"><a href="https://gal.ero.ink/">游戏</a></div>
+        <div class="navbar-item"><a href="https://blog.ero.ink/">博客</a></div>
     </div>
     <div class="navbar-group">
         <div class="navbar-item" v-on:click="userinfo">{{data.navbar}}</div>

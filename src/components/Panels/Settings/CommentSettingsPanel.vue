@@ -11,7 +11,7 @@
       @onClick="handleClick"
     />
     <div v-if="currentTab === 'tab1'">
-      <MyCommentItem v-for="c in comments" :key="c" :comment="c" />
+      <MyCommentItem v-for="c in comments" :key="c.content" :comment="c" />
     </div>
   </div>
 </template>

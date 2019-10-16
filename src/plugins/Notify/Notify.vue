@@ -1,6 +1,6 @@
 <template>
 <div class="notify-container">
-    <div class="notify" v-for="notification in notifications" v-bind:style="notification.style">
+    <div class="notify" v-for="notification in notifications" :key="notification.style" v-bind:style="notification.style">
         <div class="title">{{ notification.title }}</div>
         <div class="content">{{ notification.content }}</div>
     </div>

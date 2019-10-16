@@ -71,6 +71,18 @@
         <div class="controls actions">
           <button v-on:click="CreateArchive">保存</button>
         </div>
+        <div v-if="archive.id !== 0">
+          <div class="control-group">
+            <label>添加到分类</label>
+            <select v-model="selected3">
+              <option v-for="a in archiveList" :key="a.key" v-bind:value="a.key">{{ a.value }}</option>
+            </select>
+          </div>
+          <div class="controls actions">
+            <button v-on:click="append2Category(archive.id,selected3,'archive')">添加</button>
+            <button v-on:click="delete2Category(archive.id,selected3,'archive')">删除</button>
+          </div>
+        </div>
       </div>
       <div v-if="currentTab === 'tab2'">
         <div class="control-group">
@@ -141,6 +153,18 @@
         <div class="controls actions">
           <button v-on:click="CreateNovel">保存</button>
         </div>
+        <div v-if="novel.id !== 0">
+          <div class="control-group">
+            <label>添加/删除 到分类</label>
+            <select v-model="selected3">
+              <option v-for="a in novelList" :key="a.key" v-bind:value="a.key">{{ a.value }}</option>
+            </select>
+          </div>
+          <div class="controls actions">
+            <button v-on:click="append2Category(novel.id,selected2,'novel')">添加</button>
+            <button v-on:click="delete2Category(novel.id,selected2,'novel')">删除</button>
+          </div>
+        </div>
       </div>
       <div v-if="currentTab === 'tab4'">
         <div class="control-group">
@@ -163,26 +187,26 @@
           <select v-model="selected2">
             <option
               v-for="novel in novelList"
-              :key="novel"
+              :key="novel.key"
               v-bind:value="novel.key"
             >{{ novel.value }}</option>
           </select>
         </div>
         <div class="controls actions">
-          <button>删除</button>
+          <button v-on:click="deleteCategory(selected2)">删除</button>
         </div>
         <div class="control-group">
           <label>文章分类</label>
           <select v-model="selected3">
             <option
               v-for="archive in archiveList"
-              :key="archive"
+              :key="archive.key"
               v-bind:value="archive.key"
             >{{ archive.value }}</option>
           </select>
         </div>
         <div class="controls actions">
-          <button>删除</button>
+          <button v-on:click="deleteCategory(selected3)">删除</button>
         </div>
       </div>
     </div>
@@ -236,9 +260,9 @@ export default {
         console.log(data);
         if (data.status == 0 && data.count != 0) {
           data.data.forEach(Element => {
-            if (Element.type == 1) {
+            if (Element.type == 2) {
               this.novelList.push({ key: Element.id, value: Element.title });
-            } else if (Element.type == 2) {
+            } else if (Element.type == 1) {
               this.archiveList.push({ key: Element.id, value: Element.title });
             }
           });
@@ -319,6 +343,60 @@ export default {
     };
   },
   methods: {
+    delete2Category(id, category, type) {
+      let jwt = localStorage.getItem("jwt");
+      if (jwt == null || jwt == "null") {
+        this.$Notify("失败", "您的登陆凭据已到期", "background-color:#4eb739");
+      }
+      var formData = new FormData();
+      formData.append("archive", id);
+      formData.append("category", category);
+      fetch(this.$config.api_base + "category/" + type + "/", {
+        method: "delete",
+        mode: "cors",
+        credentials: "include",
+        headers: {
+          Authorization: "Bearer " + jwt
+          //  'Content-Type': 'multipart/form-data',
+        },
+        body: formData
+      })
+        .then(data => data.json())
+        .then(data => {
+          if (data.status == 0) {
+            this.$Notify("成功", "添加成功", "background-color:#4eb739");
+          } else {
+            this.$Notify("失败", "添加失败", "background-color:#4eb739");
+          }
+        });
+    },
+    append2Category(id, category, type) {
+      let jwt = localStorage.getItem("jwt");
+      if (jwt == null || jwt == "null") {
+        this.$Notify("失败", "您的登陆凭据已到期", "background-color:#4eb739");
+      }
+      var formData = new FormData();
+      formData.append("archive", id);
+      formData.append("category", category);
+      fetch(this.$config.api_base + "category/" + type + "/", {
+        method: "post",
+        mode: "cors",
+        credentials: "include",
+        headers: {
+          Authorization: "Bearer " + jwt
+          //  'Content-Type': 'multipart/form-data',
+        },
+        body: formData
+      })
+        .then(data => data.json())
+        .then(data => {
+          if (data.status == 0) {
+            this.$Notify("成功", "添加成功", "background-color:#4eb739");
+          } else {
+            this.$Notify("失败", "添加失败", "background-color:#4eb739");
+          }
+        });
+    },
     upVolume(event) {
       console.log(event.target.files[0]);
       var formData = new FormData();
@@ -346,6 +424,29 @@ export default {
           } else {
             this.volume.file = 0;
             this.$Notify("失败", "文件上传失败", "background-color:#4eb739");
+          }
+        });
+    },
+    deleteCategory(id) {
+      let jwt = localStorage.getItem("jwt");
+      if (jwt == null || jwt == "null") {
+        this.$Notify("失败", "您的登陆凭据已到期", "background-color:#4eb739");
+      }
+      fetch(this.$config.api_base + "category/" + id, {
+        method: "delete",
+        mode: "cors",
+        credentials: "include",
+        headers: {
+          Authorization: "Bearer " + jwt
+          //  'Content-Type': 'multipart/form-data',
+        }
+      })
+        .then(data => data.json())
+        .then(data => {
+          if (data.status == 0) {
+            this.$Notify("成功", "添加成功", "background-color:#4eb739");
+          } else {
+            this.$Notify("失败", "添加失败", "background-color:#4eb739");
           }
         });
     },
@@ -513,7 +614,6 @@ export default {
           }
         });
     },
-
     handleClick(newTab) {
       this.currentTab = newTab;
     },
