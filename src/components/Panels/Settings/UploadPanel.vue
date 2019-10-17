@@ -147,6 +147,14 @@
         </div>
 
         <div class="control-group">
+          <label>排序</label>
+          <div class="controls">
+            <input type="text" title="排序" value v-model="volume.z_index" />
+          </div>
+          <label class="tips">我不懂，总之后端是oder by这个字段的</label>
+        </div>
+
+        <div class="control-group">
           <label>文件</label>
           <input type="file" @change="upVolume($event)" accept="epub/epub" />
         </div>
@@ -338,7 +346,8 @@ export default {
         novelid: "",
         title: "",
         cover: "",
-        file: 0
+        file: 0，
+        z_index:"",
       }
     };
   },
@@ -599,7 +608,7 @@ export default {
       formData.append("title", this.volume.title);
       formData.append("file", this.volume.file);
       formData.append("cover", this.volume.cover);
-
+      formData.append("z_index", this.volume.z_index);
       fetch(this.$config.api_base + "volume/"+this.volume.novelid, {
         method: "post",
         mode: "cors",
