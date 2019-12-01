@@ -34,11 +34,19 @@ export default {
     UploadPanel
   },
   created() {
-    let jwt = localStorage.getItem("jwt");
-    if (jwt == null) {
-      localStorage.setItem("nickname", null);
-      // location.href = '/';
+    function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i].trim();
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+      }
+      return "";
     }
+    let jwt = getCookie("token");
+      if ( jwt == "") {
+        this.$router.push('/')
+      }
     fetch(this.$config.api_base + "user/", {
       methods: "get",
       credentials: "include",
@@ -70,6 +78,8 @@ export default {
       })
       .catch(data => {
         console.log(data);
+        this.$Notify("登陆失败", "登陆令牌已经过期，请重新登陆!", "background-color:#9d5321");
+        this.$router.push('/')
       });
   },
   data() {

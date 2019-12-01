@@ -32,7 +32,16 @@ export default {
     };
   },
   created() {
-    let jwt = localStorage.getItem("jwt");
+     function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i].trim();
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+      }
+      return "";
+    }
+    let jwt = getCookie("token");
     if (jwt == null) {
       localStorage.setItem("nickname", null);
       location.href = "/";

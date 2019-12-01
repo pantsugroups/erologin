@@ -46,11 +46,20 @@ export default {
         { title: " 管理文章", value: "tab3" }
       );
     }
-    let jwt = localStorage.getItem("jwt");
-    if (jwt == null) {
-      localStorage.setItem("nickname", null);
-      location.href = "/";
+    function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i].trim();
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+      }
+      return "";
     }
+      let jwt = getCookie("token");
+      if ( jwt == "") {
+        this.$Notify("失败", "您的登陆凭据已到期", "background-color:#4eb739");
+        this.$cookies.remove("token")
+      }
     fetch(this.$config.api_base + "user/book?page_size=30", {
       credentials: "include",
       headers: {

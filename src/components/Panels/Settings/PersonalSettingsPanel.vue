@@ -81,11 +81,20 @@ export default {
     },
     saveprofile() {
       console.log(1);
-      let jwt = localStorage.getItem("jwt");
-      if (jwt == null) {
-        localStorage.setItem("nickname", null);
-        // location.href = '/';
+      function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i].trim();
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
       }
+      return "";
+    }
+    let jwt = getCookie("token");
+    if (jwt == null) {
+      localStorage.setItem("nickname", null);
+      location.href = "/";
+    }
 
       fetch(this.$config.api_base + "user/", {
         method: "PUT",

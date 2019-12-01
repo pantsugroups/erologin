@@ -346,7 +346,7 @@ export default {
         novelid: "",
         title: "",
         cover: "",
-        file: 0，
+        file: 0,
         z_index:"",
       }
     };
@@ -557,8 +557,17 @@ export default {
         });
     },
     CreateNovel() {
-      let jwt = localStorage.getItem("jwt");
-      if (jwt == null || jwt == "null") {
+      function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i].trim();
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+      }
+      return "";
+    }
+      let jwt = getCookie("token");
+      if ( jwt == "") {
         this.$Notify("失败", "您的登陆凭据已到期", "background-color:#4eb739");
         this.$cookies.remove("token")
       }

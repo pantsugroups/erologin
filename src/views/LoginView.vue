@@ -42,15 +42,23 @@ export default {
 
   components: {},
   created() {
-    let jwt = localStorage.getItem("jwt");
-    if (jwt != null && jwt != "null") {
-      localStorage.setItem("nickname", null);
-      // location.href = '/settings/personal';
+    function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i].trim();
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+      }
+      return "";
     }
+    let jwt = getCookie("token");
+      if ( jwt != "") {
+        this.$router.push('/settings/personal')
+      }
   },
   methods: {
     login: function() {
-      console.log(this.data.username, this.data.passwd);
+      
       fetch(this.$config.api_base + "user/login", {
         method: "post",
         mode: "cors",
@@ -66,10 +74,9 @@ export default {
             // 登陆成功
             this.$Notify("登陆成功", "欢迎回来!", "background-color:#9d5321");
             console.log(data, data.token);
-            localStorage.setItem("jwt", data.token);
-            localStorage.setItem("nickname", data.data.nickname);
-            this.$cookies.set("token",data.token,"2","/","")
-            window.location.href = "/settings/personal";
+            this.$cookies.set("token",data.token,"2","/","ero.ink")
+            
+            this.$router.push('/settings/personal')
           } else {
             this.$Notify("登陆失败", data.msg, "background-color:#red");
 
