@@ -2,40 +2,26 @@
   <div class="main padding-limiter">
     <div class="panel login-panel">
       <div class="double-column">
-        <div class="panel-wide">
-          <img class="login-img" src="../assets/login.jpg" />
-          <a
-            class="login-img-source"
-            href="https://www.pixiv.net/member_illust.php?mode=medium&illust_id=72175889"
-          >Source</a>
-        </div>
+        
         <div class="panel-narrow">
-          <!-- <form class="login-form"> -->
-          <div class="title">
-            <span class="mdi mdi-book-open-variant"></span>Ero Login
-          </div>
+          
           <div class="control-group">
-            <label>用户名</label>
+            
             <div class="controls">
-              <input type="text" title="用户名" value v-model="data.username" />
+              
+              <h class="tips" style="text-align:right;" >请打开您注册时填写的邮箱，访问我们发送的链接以便验证您的身份。</h>
             </div>
           </div>
-          <div class="control-group">
-            <label>密码</label>
-            <div class="controls">
-              <input type="password" title="密码" value v-model="data.passwd" />
-            </div>
-          </div>
-          <div style="text-align:right">
-            <label ><a href="/register" style="margin: 0 10px;">没有账号？点我注册</a></label>
-          </div>
+          
           <div class="controls actions">
-            <button v-on:click="login">登陆</button>
+            <button v-on:click="sendmail">重新发送验证邮件</button>
           </div>
           <!-- </form> -->
         </div>
+        
       </div>
     </div>
+    
   </div>
 </template>
 
@@ -44,9 +30,13 @@ export default {
   name: "LoginView",
 
   components: {},
-  created() {
+  created(){
+      
+  },
+  methods: {
     
-    function getCookie(cname) {
+    sendmail: function() {
+      function getCookie(cname) {
       var name = cname + "=";
       var ca = document.cookie.split(";");
       for (var i = 0; i < ca.length; i++) {
@@ -56,47 +46,33 @@ export default {
       return "";
     }
     let jwt = getCookie("token");
-     
-      if ( jwt != "") {
-        if( this.$route.query.referer != undefined){
-              this.$router.push({path:'/settings/personal',query:{referer:this.$route.query.referer}})
-            }
-            this.$router.push({path:'/settings/personal'})
+      if ( jwt == "") {
+        this.$router.push('/')
       }
-  },
-  methods: {
-    login: function() {
-     
-      fetch(this.$config.api_base + "user/login", {
-        method: "post",
+
+      fetch(this.$config.api_base + "user/sendmail", {
+        method: "get",
         mode: "cors",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
-        },
         credentials: "include",
-        body: "username=" + this.data.username + "&password=" + this.data.passwd
+       headers: {
+        Authorization: "Bearer " + jwt
+      },
       })
         .then(data => data.json())
         .then(data => {
           if (data.status === 0) {
             // 登陆成功
-            this.$Notify("登陆成功", "欢迎回来!", "background-color:#9d5321");
+            this.$Notify("发送成功", "邮件发送成功，请到邮箱查收!", "background-color:#9d5321");
             
-            console.log(data, data.token);
-            this.$cookies.set("token",data.token,"2","/","ero.ink")
-            if( this.$route.query.referer != undefined){
-              this.$router.push('/settings/personal',{referer:this.$route.query.referer})
-            }
-            this.$router.push({path:'/settings/personal',query:{referer:1}})
           } else {
-            this.$Notify("登陆失败", data.msg, "background-color:#red");
+            this.$Notify("发送失败", data.msg, "background-color:#red");
 
           }
         })
         .catch(data => {
           console.log(data);
-          this.$Notify("登陆失败", data.msg, "background-color:#red");
-          this.$cookies.remove("token")
+          this.$Notify("发送失败", data.msg, "background-color:#red");
+          
         });
     }
   },
@@ -105,7 +81,14 @@ export default {
     return {
       data: {
         username: "",
-        passwd: ""
+        nickname:"",
+        password: "",
+        password_confirm:"",
+        verify_code:"",
+        verify_id:"",
+        invite_code:"",
+        b64_image:"",
+        b64_display:"none",
       }
     };
   }

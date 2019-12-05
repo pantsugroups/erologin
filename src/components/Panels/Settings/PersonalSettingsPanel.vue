@@ -51,7 +51,16 @@
         <p>前端咕咕咕ing，你让我写我也不会写啊</p>
       </div>
       <div v-if="currentTab === 'tab3'">
-        <p>如果觉得本站好用，请跟您的网友多多宣传</p>
+        <div class="control-group">
+          <label>邀请码</label>
+          <div class="controls">
+            <input type="text" title="邀请码" value v-model="invite_vode" />
+          </div>
+          
+        </div>
+        <div class="controls actions">
+          <button v-on:click="createincitecode">生成邀请码</button>
+        </div>
       </div>
     </div>
   </div>
@@ -72,12 +81,62 @@ export default {
       nickname: "",
       bio: "",
       hito: "",
-      website: ""
+      website: "",
+      invite_vode:"",
     };
   },
   methods: {
     handleClick(newTab) {
       this.currentTab = newTab;
+    },
+    createincitecode(){
+      function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i].trim();
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+      }
+      return "";
+    }
+    let jwt = getCookie("token");
+    if (jwt == null) {
+      localStorage.setItem("nickname", null);
+      location.href = "/";
+    }
+    fetch(this.$config.api_base + "CreateInciteCode/", {
+        method: "get",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+          Authorization: "Bearer " + jwt
+        },
+        credentials: "include",
+      })
+        .then(data => data.json())
+        .then(data => {
+          if (data.status === 0) {
+            this.invite_vode=data.data.Code;
+            console.log(data)
+            this.$Notify(
+              "成功",
+              "邀请码生成成功",
+              "background-color:#4eb739"
+            );
+          } else {
+            this.$Notify("失败", data.msg, "background-color:#4eb739");
+          }
+        })
+        .catch(data => {
+          this.$Notify("错误", "未知错误", "background-color:#4eb739");
+          if (data.message == "invalid or expired jwt") {
+            //
+            localStorage.setItem("jwt", null);
+            localStorage.setItem("nickname", null);
+            location.href = "/";
+          }
+        });
+
+
     },
     saveprofile() {
       console.log(1);

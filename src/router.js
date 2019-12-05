@@ -4,7 +4,8 @@ import Router from 'vue-router'
 //import IndexView from '@/views/IndexView.vue'
 import SettingsView from '@/views/SettingsView.vue'
 import LoginView from '@/views/LoginView.vue'
-
+import RegisterView from '@/views/RegisterView.vue'
+import VerifyMailView from '@/views/VerifyMailView.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -41,6 +42,22 @@ export default new Router({
       meta:{
         title: '登陆 · Ero Light'
       }
-    }
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: RegisterView,
+      meta:{
+        title: '注册 · Ero Light'
+      }
+    },
+    {
+      path: '/verify',
+      name: 'verify',
+      component: VerifyMailView,
+      meta:{
+        title: '验证 · Ero Light'
+      }
+    },
   ]
 })

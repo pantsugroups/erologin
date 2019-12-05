@@ -57,17 +57,23 @@ export default {
     })
       .then(data => data.json())
       .then(data => {
-        this.user = data.data;
+        if(data.status==0){
+          this.user = data.data;
+          
+          if (this.$route.query.referer != undefined){
+            
+            window.location.href=this.$route.query.referer;
+          }
         if (this.user.avatar == "") {
           this.user.avatar = "https://qwq.moe/img/avatar.jpg";
         }
         if (this.user.status === "admin") {
           this.user.lv_name = "管理员";
           this.user.lv = 2;
-        } else if (this.user.lv === "active") {
+        } else if (this.user.status === "active") {
           this.user.lv_name = "注册用户";
           this.user.lv = 1;
-        } else if (this.user.status === inactive) {
+        } else if (this.user.status === "inactive") {
           this.user.lv_name = "未验证用户";
           this.user.lv = 0;
         } else {
@@ -75,11 +81,17 @@ export default {
           this.user.lv = -1;
         }
         this.user.lv = "Lv. " + this.user.lv;
+        }else if(data.status==403){
+          this.$Notify("注意", "您还未验证邮箱，请先验证邮箱！", "background-color:#9d5321");
+          this.$router.push('/verify') 
+        }
+        
       })
       .catch(data => {
         console.log(data);
         this.$Notify("登陆失败", "登陆令牌已经过期，请重新登陆!", "background-color:#9d5321");
-        this.$router.push('/')
+        this.$router.push('/') 
+        this.$cookies.remove("token")
       });
   },
   data() {
