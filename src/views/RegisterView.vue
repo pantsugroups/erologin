@@ -11,6 +11,7 @@
             <label>邮箱</label>
             <div class="controls">
               <input type="text" title="邮箱" value v-model="data.mail" />
+              <br />
               <label class="tips" style="text-align:right;">写错的话就注册不了咯~</label>
             </div>
           </div>
@@ -18,6 +19,7 @@
             <label>用户名</label>
             <div class="controls">
               <input type="text" title="用户名" value v-model="data.username" />
+              <br />
               <label class="tips" style="text-align:right;">用作登陆，写了就不能改了哦~</label>
             </div>
           </div>
@@ -31,6 +33,7 @@
             <label>密码</label>
             <div class="controls">
               <input type="password" title="密码" value v-model="data.password" />
+              <br />
               <label class="tips password" style="text-align:right;">6&lt;长度&lt;16，用作登陆，写了就不能改了哦~</label>
             </div>
           </div>
@@ -44,6 +47,7 @@
             <label>邀请码</label>
             <div class="controls">
               <input type="text" title="邀请码" value v-model="data.invite_code" />
+              <br />
               <label class="tips" style="text-align:right;">不是必填，但是有时候又是必填</label>
             </div>
           </div>
@@ -52,7 +56,7 @@
             <div class="controls">
               <input type="text" title="验证码" value v-model="data.verify_code" />
 
-              <img :src="data.b64_image" style="width:100%;height:60%;" v-on:click="get_verify" />
+              <img :src="data.b64_image" style="width:auto;height:60%;" v-on:click="get_verify" />
             </div>
           </div>
           <div class="controls actions">
@@ -231,6 +235,9 @@ export default {
       }
     };
   }
+  // highlight(dom){
+
+  // }
 };
 </script>
 
@@ -239,9 +246,7 @@ export default {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding-bottom: 63px;
-  padding-top: 0;
+  padding-bottom: 0;
 }
 .double-column {
   align-items: center;
@@ -283,12 +288,14 @@ export default {
 .control-group {
   display: flex;
   padding: 15px 40px;
+  padding-left: 10px;
 }
 .controls {
   width: 100%;
 }
 label {
-  width: 50px;
+  width: 62px;
+  /* 解决 “重复密码” 变成 “重复密\n码”*/
   color: #777;
   overflow: hidden;
   padding: 3px;
@@ -383,5 +390,25 @@ a {
   color: #333;
   font-size: 15px;
   padding-left: 20px;
+}
+@media screen and (max-width: 900px) {
+  .panel-wide {
+    display: none;
+  }
+  .panel-narrow{
+    width: 100%;
+  }
+}
+@media screen and (min-width: 901px) {
+  .panel-narrow{
+    width: 400px;
+  }
+}
+@media screen and (max-width:730px){
+  //低于731px的话顶栏上的字就会换行
+  // .navbar {
+  //   display:none
+  // }
+  //todo: 低于730px时换成折叠式菜单(sider)
 }
 </style>
