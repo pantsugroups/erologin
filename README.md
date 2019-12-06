@@ -2,13 +2,17 @@
 
 > Ero Light Front End
 
+## Todo
+
+- [] 自适应顶栏菜单
+
 ## Build Setup
 
 ``` bash
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
+# serve with hot reload at localhost:1024
 npm run dev
 
 # build for production with minification
