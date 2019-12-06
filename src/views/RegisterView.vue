@@ -2,24 +2,23 @@
   <div class="main padding-limiter">
     <div class="panel login-panel">
       <div class="double-column">
-        
         <div class="panel-narrow">
           <!-- <form class="login-form"> -->
           <!-- <div class="title">
             <span class="mdi mdi-book-open-variant"></span>Ero Login
-          </div> -->
+          </div>-->
           <div class="control-group">
             <label>邮箱</label>
             <div class="controls">
               <input type="text" title="邮箱" value v-model="data.mail" />
-              <label class="tips" style="text-align:right;" >写错的话就注册不了咯~</label>
+              <label class="tips" style="text-align:right;">写错的话就注册不了咯~</label>
             </div>
           </div>
           <div class="control-group">
             <label>用户名</label>
             <div class="controls">
               <input type="text" title="用户名" value v-model="data.username" />
-              <label class="tips" style="text-align:right;" >用作登陆，写了就不能改了哦~</label>
+              <label class="tips" style="text-align:right;">用作登陆，写了就不能改了哦~</label>
             </div>
           </div>
           <div class="control-group">
@@ -32,6 +31,7 @@
             <label>密码</label>
             <div class="controls">
               <input type="password" title="密码" value v-model="data.password" />
+              <label class="tips password" style="text-align:right;">6&lt;长度&lt;16，用作登陆，写了就不能改了哦~</label>
             </div>
           </div>
           <div class="control-group">
@@ -44,15 +44,15 @@
             <label>邀请码</label>
             <div class="controls">
               <input type="text" title="邀请码" value v-model="data.invite_code" />
-              <label class="tips" style="text-align:right;" >不是必填，但是有时候又是必填</label>
+              <label class="tips" style="text-align:right;">不是必填，但是有时候又是必填</label>
             </div>
           </div>
           <div class="control-group">
             <label>验证码</label>
             <div class="controls">
               <input type="text" title="验证码" value v-model="data.verify_code" />
-              
-              <img :src="data.b64_image" style="width:100%;height:60%;" v-on:click="get_verify"/>
+
+              <img :src="data.b64_image" style="width:100%;height:60%;" v-on:click="get_verify" />
             </div>
           </div>
           <div class="controls actions">
@@ -77,28 +77,28 @@ export default {
   name: "LoginView",
 
   components: {},
-  created(){
-      fetch(this.$config.api_base + "verify", {
-        method: "get",
-      })
-        .then(data => data.json())
-        .then(data => {
-          if (data.status === 0) {
-            this.data.verify_id=data.data.code_id;
-            this.data.b64_image=data.data.data;
-          } else {
-            this.$Notify("获取验证码失败", data.msg, "background-color:#red");
-          }
-        })
-        .catch(data => {
-          console.log(data);
+  created() {
+    fetch(this.$config.api_base + "verify", {
+      method: "get"
+    })
+      .then(data => data.json())
+      .then(data => {
+        if (data.status === 0) {
+          this.data.verify_id = data.data.code_id;
+          this.data.b64_image = data.data.data;
+        } else {
           this.$Notify("获取验证码失败", data.msg, "background-color:#red");
-        });
+        }
+      })
+      .catch(data => {
+        console.log(data);
+        this.$Notify("获取验证码失败", data.msg, "background-color:#red");
+      });
   },
   methods: {
-    get_verify:function(){
-        fetch(this.$config.api_base + "verify", {
-        method: "get",
+    get_verify: function() {
+      fetch(this.$config.api_base + "verify", {
+        method: "get"
         // mode: "cors",
         // headers: {
         //   "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
@@ -109,8 +109,8 @@ export default {
         .then(data => data.json())
         .then(data => {
           if (data.status === 0) {
-            this.data.verify_id=data.data.code_id;
-            this.data.b64_image=data.data.data;
+            this.data.verify_id = data.data.code_id;
+            this.data.b64_image = data.data.data;
           } else {
             this.$Notify("获取验证码失败", data.msg, "background-color:#red");
           }
@@ -118,47 +118,101 @@ export default {
         .catch(data => {
           console.log(data);
           this.$Notify("获取验证码失败", data.msg, "background-color:#red");
-          
         });
     },
-    register: function() {
-      var formData = new FormData();
-      formData.append("nickname", this.data.nickname);
-      formData.append("username", this.data.username);
-      formData.append("mail", this.data.mail);
-      formData.append("password", this.data.password);
-      formData.append("password_confirm", this.data.password_confirm);
-      formData.append("verify_code", this.data.verify_code);
-      formData.append("verify_id", this.data.verify_id);
-      formData.append("invite_code", this.data.invite_code);
-      fetch(this.$config.api_base + "user/register", {
-        method: "post",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
-        },
-        credentials: "include",
-        body: "username=" + this.data.username + "&password=" + this.data.password+"&password_confirm="+this.data.password_confirm+"&mail="+this.data.mail+"&nickname="+this.data.nickname+"&verify_code="+ this.data.verify_code+"&verify_id="+this.data.verify_id+"&invite_code="+this.data.invite_code
-      })
-        .then(data => data.json())
-        .then(data => {
-          if (data.status === 0) {
-            // 登陆成功
-            this.$Notify("注册成功", "欢迎加入我们!\n我们发送了一封邮件到你的邮箱作为验证。", "background-color:#9d5321");
-            
-            
-            
-            this.$router.push('/')
-          } else {
-            this.$Notify("注册失败", data.msg, "background-color:#red");
+    register: async function() {
+      let regx_mail = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
+      let data = { ...this.data };
 
+      // <Boolean> || (<Function>) <--循环寻找第一个真值
+      // 如果 Boolean 表达式是 false 则 Function 运行
+      // 如果 Boolean 表达式是 true  则 Function 不运行
+      data.password == data.password_confirm ||
+        (() => {
+          data.password = false;
+          this.$Notify(
+            "注册失败",
+            "两次输入的密码不相等",
+            "background-color:#red"
+          );
+          throw new Error("两次输入的密码不相等");
+        })();
+      //如果没通过验证，强行退出函数
+      (data.password.length >= 6 && data.password.length <= 16) ||
+        (() => {
+          data.password = false;
+          this.$Notify("注册失败", "6≤密码长度≤16", "background-color:#red");
+          throw new Error("6≤密码长度≤16");
+        })();
+
+      (data.username.length > 0 && data.username.length <= 8) ||
+        (() => {
+          data.password = false;
+          this.$Notify("注册失败", "0≤用户名长度≤8", "background-color:#red");
+          throw new Error("0≤用户名长度≤8");
+        })();
+
+      regx_mail.test(String(data.mail)) ||
+        (() => {
+          data.password = false;
+          this.$Notify("注册失败", "邮箱格式错误", "background-color:#red");
+          throw new Error("邮箱格式错误");
+        })();
+
+      let body = {
+        username: data.username,
+        password: data.password,
+        password_confirm: data.password_confirm,
+        mail: data.mail,
+        nickname: data.nickname,
+        verify_code: data.verify_code,
+        verify_id: data.verify_id,
+        invite_code: data.invite_code
+      };
+      let fetch_req_body = "";
+      for (const key in body) {
+        if (key in body) {
+          const value = body[key];
+          fetch_req_body.length == 0
+            ? (fetch_req_body += `${key}=${value}`)
+            : (fetch_req_body += `&${key}=${value}`);
+        }
+      }
+      if (data.username && data.password && data.mail) {
+        try {
+          let fetch_data = await fetch(
+            this.$config.api_base + "user/register",
+            {
+              method: "post",
+              mode: "cors",
+              headers: {
+                "Content-Type":
+                  "application/x-www-form-urlencoded; charset=UTF-8"
+              },
+              credentials: "include",
+              body: fetch_req_body
+            }
+          );
+          if (!fetch_data.ok)
+            throw new Error("网络错误: " + fetch_data.statusText);
+          let fetch_res_body = await fetch_data.json();
+          console.log(fetch_res_body);
+          if (fetch_res_body.status === 0) {
+            // 登陆成功
+            this.$Notify(
+              "注册成功",
+              "欢迎加入我们!\n我们发送了一封邮件到你的邮箱作为验证。",
+              "background-color:#9d5321"
+            );
+            this.$router.push("/");
+          } else {
+            throw new Error("服务器说: " + fetch_res_body.error);
           }
-        })
-        .catch(data => {
-          console.log(data);
-          this.$Notify("注册失败", data.msg, "background-color:#red");
-          
-        });
+        } catch (error) {
+          console.log(error.message);
+          this.$Notify("注册失败", error.message, "background-color:#red");
+        }
+      }
     }
   },
 
@@ -166,14 +220,14 @@ export default {
     return {
       data: {
         username: "",
-        nickname:"",
+        nickname: "",
         password: "",
-        password_confirm:"",
-        verify_code:"",
-        verify_id:"",
-        invite_code:"",
-        b64_image:"",
-        b64_display:"none",
+        password_confirm: "",
+        verify_code: "",
+        verify_id: "",
+        invite_code: "",
+        b64_image: "",
+        b64_display: "none"
       }
     };
   }
