@@ -210,7 +210,7 @@ export default {
             );
             this.$router.push("/");
           } else {
-            throw new Error("服务器说: " + fetch_res_body.error);
+            throw new Error("服务器说: " + fetch_res_body.msg);
           }
         } catch (error) {
           console.log(error.message);
