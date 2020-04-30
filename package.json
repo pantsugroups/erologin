@@ -11,7 +11,7 @@
     },
     "dependencies": {
         "@mdi/font": "^3.0.39",
-        "jquery": "^3.4.1",
+        "jquery": "^3.5.0",
         "less": "^3.8.1",
         "less-loader": "^4.1.0",
         "lint": "^0.7.0",
