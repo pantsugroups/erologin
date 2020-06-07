@@ -6543,9 +6543,9 @@ webpack-dev-middleware@1.12.2:
     range-parser "^1.0.3"
     time-stamp "^2.0.0"
 
-webpack-dev-server@^2.9.1:
+webpack-dev-server@^2.11.5:
   version "2.11.5"
-  resolved "https://registry.npm.taobao.org/webpack-dev-server/download/webpack-dev-server-2.11.5.tgz#416fbdea0e04eebe44a626e791d5a2eb37fe8c48"
+  resolved "https://registry.yarnpkg.com/webpack-dev-server/-/webpack-dev-server-2.11.5.tgz#416fbdea0e04eebe44a626e791d5a2eb37fe8c48"
   dependencies:
     ansi-html "0.0.7"
     array-includes "^3.0.3"
@@ -6624,8 +6624,8 @@ websocket-driver@>=0.5.1:
     websocket-extensions ">=0.1.1"
 
 websocket-extensions@>=0.1.1:
-  version "0.1.3"
-  resolved "https://registry.npm.taobao.org/websocket-extensions/download/websocket-extensions-0.1.3.tgz#5d2ff22977003ec687a4b87073dfbbac146ccf29"
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/websocket-extensions/-/websocket-extensions-0.1.4.tgz#7f8473bc839dfd87608adb95d7eb075211578a42"
 
 whet.extend@~0.9.9:
   version "0.9.9"
